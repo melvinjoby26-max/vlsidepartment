@@ -1,0 +1,19 @@
+{
+  "name": "ee-vlsi-events-portal",
+  "version": "1.0.0",
+  "description": "Department of EE - VLSI Design and Technology Events & Registration Web Portal",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test_unit_suite.js"
+  },
+  "keywords": [
+    "vlsi",
+    "symposium",
+    "events",
+    "registration",
+    "siet"
+  ],
+  "author": "EE - VLSI Department, Sri Shakthi Institute of Engineering & Technology",
+  "license": "ISC"
+}
