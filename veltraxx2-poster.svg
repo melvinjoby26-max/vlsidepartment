@@ -1,0 +1,144 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 450" width="800" height="450">
+  <defs>
+    <!-- Background Gradient -->
+    <linearGradient id="posterBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0a0f1d"/>
+      <stop offset="40%" stop-color="#0f172a"/>
+      <stop offset="80%" stop-color="#1e1b4b"/>
+      <stop offset="100%" stop-color="#311042"/>
+    </linearGradient>
+
+    <linearGradient id="neonCyan" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#06b6d4"/>
+      <stop offset="100%" stop-color="#3b82f6"/>
+    </linearGradient>
+
+    <linearGradient id="neonRose" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#f43f5e"/>
+      <stop offset="100%" stop-color="#fb7185"/>
+    </linearGradient>
+
+    <linearGradient id="chipGold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#fbbf24"/>
+      <stop offset="100%" stop-color="#d97706"/>
+    </linearGradient>
+
+    <!-- Circuit Pattern -->
+    <pattern id="circuitGrid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
+      <circle cx="20" cy="20" r="1" fill="rgba(6,182,212,0.3)"/>
+    </pattern>
+  </defs>
+
+  <!-- Background Canvas -->
+  <rect width="800" height="450" fill="url(#posterBg)"/>
+  <rect width="800" height="450" fill="url(#circuitGrid)"/>
+
+  <!-- Glowing Silicon Circuit Tracks -->
+  <g opacity="0.6">
+    <path d="M 0 80 L 180 80 L 240 140 L 450 140" fill="none" stroke="#06b6d4" stroke-width="2.5"/>
+    <circle cx="180" cy="80" r="4" fill="#38bdf8"/>
+    <circle cx="240" cy="140" r="4" fill="#38bdf8"/>
+    <circle cx="450" cy="140" r="5" fill="#f43f5e"/>
+
+    <path d="M 500 380 L 620 380 L 680 320 L 800 320" fill="none" stroke="#f43f5e" stroke-width="2.5"/>
+    <circle cx="500" cy="380" r="4" fill="#fb7185"/>
+    <circle cx="620" cy="380" r="4" fill="#fb7185"/>
+    <circle cx="680" cy="320" r="5" fill="#06b6d4"/>
+
+    <path d="M 60 450 L 160 350 L 280 350" fill="none" stroke="#a855f7" stroke-width="2"/>
+    <circle cx="160" cy="350" r="3.5" fill="#c084fc"/>
+    <circle cx="280" cy="350" r="3.5" fill="#c084fc"/>
+
+    <path d="M 550 0 L 620 70 L 750 70" fill="none" stroke="#3b82f6" stroke-width="2"/>
+    <circle cx="620" cy="70" r="3.5" fill="#60a5fa"/>
+    <circle cx="750" cy="70" r="3.5" fill="#60a5fa"/>
+  </g>
+
+  <!-- Central Silicon IC Chip Silhouette -->
+  <g transform="translate(480, 80)">
+    <rect x="0" y="0" width="260" height="260" rx="20" fill="rgba(15,23,42,0.75)" stroke="url(#neonCyan)" stroke-width="3"/>
+    <rect x="25" y="25" width="210" height="210" rx="12" fill="rgba(30,27,75,0.6)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5" stroke-dasharray="6 3"/>
+    
+    <!-- Microchip Die Cores -->
+    <rect x="50" y="50" width="70" height="70" rx="6" fill="rgba(6,182,212,0.2)" stroke="#06b6d4" stroke-width="1.5"/>
+    <text x="85" y="90" fill="#38bdf8" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">CPU CORE</text>
+
+    <rect x="140" y="50" width="70" height="70" rx="6" fill="rgba(244,63,94,0.2)" stroke="#f43f5e" stroke-width="1.5"/>
+    <text x="175" y="90" fill="#fb7185" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">AI TENSOR</text>
+
+    <rect x="50" y="140" width="70" height="70" rx="6" fill="rgba(168,85,247,0.2)" stroke="#a855f7" stroke-width="1.5"/>
+    <text x="85" y="180" fill="#c084fc" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">ANALOG IP</text>
+
+    <rect x="140" y="140" width="70" height="70" rx="6" fill="rgba(251,191,36,0.2)" stroke="#fbbf24" stroke-width="1.5"/>
+    <text x="175" y="180" fill="#fde047" font-family="monospace" font-size="11" font-weight="bold" text-anchor="middle">24H HACK</text>
+
+    <!-- Chip Pins on Periphery -->
+    <g fill="#fde047">
+      <rect x="40" y="-8" width="12" height="10" rx="2"/>
+      <rect x="80" y="-8" width="12" height="10" rx="2"/>
+      <rect x="120" y="-8" width="12" height="10" rx="2"/>
+      <rect x="160" y="-8" width="12" height="10" rx="2"/>
+      <rect x="200" y="-8" width="12" height="10" rx="2"/>
+
+      <rect x="40" y="258" width="12" height="10" rx="2"/>
+      <rect x="80" y="258" width="12" height="10" rx="2"/>
+      <rect x="120" y="258" width="12" height="10" rx="2"/>
+      <rect x="160" y="258" width="12" height="10" rx="2"/>
+      <rect x="200" y="258" width="12" height="10" rx="2"/>
+    </g>
+  </g>
+
+  <!-- Left Side: Poster Branding & Typography -->
+  <!-- Institution Badge -->
+  <g transform="translate(60, 45)">
+    <rect x="0" y="0" width="370" height="28" rx="14" fill="rgba(37,99,235,0.2)" stroke="#3b82f6" stroke-width="1.2"/>
+    <text x="185" y="18" fill="#93c5fd" font-family="sans-serif" font-size="10.5" font-weight="800" letter-spacing="1.5" text-anchor="middle">
+      SRI SHAKTHI INSTITUTE OF ENGINEERING &amp; TECHNOLOGY
+    </text>
+  </g>
+
+  <g transform="translate(60, 95)">
+    <text x="0" y="18" fill="#38bdf8" font-family="sans-serif" font-size="13" font-weight="700" letter-spacing="2">
+      DEPARTMENT OF EE - VLSI DESIGN &amp; TECHNOLOGY
+    </text>
+
+    <!-- Main Title: VELTRAXX 2.0 -->
+    <text x="0" y="85" fill="#ffffff" font-family="sans-serif" font-size="58" font-weight="900" letter-spacing="-1">
+      VELTRAXX
+    </text>
+    <text x="330" y="85" fill="#f43f5e" font-family="sans-serif" font-size="58" font-weight="900" letter-spacing="-1">
+      2.0
+    </text>
+
+    <!-- Subtitle / Tagline -->
+    <text x="0" y="125" fill="#e2e8f0" font-family="sans-serif" font-size="16" font-weight="700" letter-spacing="0.5">
+      NATIONAL LEVEL VLSI &amp; HARDWARE DESIGN SYMPOSIUM
+    </text>
+
+    <!-- Key Highlights Badges -->
+    <g transform="translate(0, 150)">
+      <rect x="0" y="0" width="130" height="32" rx="6" fill="#1e293b" stroke="#06b6d4" stroke-width="1.5"/>
+      <text x="65" y="20" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">⚡ 24-HR HACKATHON</text>
+
+      <rect x="140" y="0" width="125" height="32" rx="6" fill="#1e293b" stroke="#f43f5e" stroke-width="1.5"/>
+      <text x="202" y="20" fill="#fb7185" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">🏆 CASH AWARDS</text>
+
+      <rect x="275" y="0" width="115" height="32" rx="6" fill="#1e293b" stroke="#fbbf24" stroke-width="1.5"/>
+      <text x="332" y="20" fill="#fde047" font-family="sans-serif" font-size="11" font-weight="bold" text-anchor="middle">📜 EDA EXPO</text>
+    </g>
+
+    <text x="0" y="225" fill="#94a3b8" font-family="sans-serif" font-size="12" font-weight="600">
+      Venue: Sri Shakthi Tech Park, Coimbatore • Open to All Engineering Colleges
+    </text>
+  </g>
+
+  <!-- Bottom Strip -->
+  <rect x="0" y="415" width="800" height="35" fill="rgba(15,23,42,0.9)"/>
+  <text x="60" y="437" fill="#cbd5e1" font-family="sans-serif" font-size="11" font-weight="600">
+    Official Portal: http://localhost:3000/
+  </text>
+  <text x="740" y="437" fill="#38bdf8" font-family="sans-serif" font-size="11" font-weight="800" text-anchor="end">
+    REGISTER ONLINE • SCAN QR CODE
+  </text>
+</svg>

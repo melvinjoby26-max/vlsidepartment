@@ -1,0 +1,430 @@
+/**
+ * EE - VLSI DESIGN AND TECHNOLOGY
+ * Sri Shakthi Institute of Engineering & Technology
+ * Department Events Configuration & Data File
+ * 
+ * Automatically updated via Admin Portal on 11/1/2026, 7:57:25 AM
+ */
+
+// Base Defaults
+const DEFAULT_DEPARTMENT_CONFIG = {
+  "departmentCode": "EE - VLSI",
+  "departmentName": "EE - VLSI DESIGN AND TECHNOLOGY",
+  "institution": "Sri Shakthi Institute of Engineering & Technology",
+  "parentDepartment": "Department of Electrical and Electronics Engineering",
+  "subtitleBadge": "Events & Registration Portal",
+  "announcementPill": "Department Portal",
+  "announcementText": "Official Event Hub • Department of EE - VLSI Design and Technology",
+  "announcementHighlight": "🔥 VELTRAXX 2.0 Opens Soon!",
+  "navLinkEvents": "Upcoming Events",
+  "navLinkAbout": "About Department",
+  "navLinkLabs": "CAD Facilities",
+  "navLinkContact": "Contact",
+  "navCtaText": "Register for Events",
+  "heroBadge": "Academic Year 2026 - 2027",
+  "heroTitleLine1": "EE - VLSI DESIGN AND TECHNOLOGY",
+  "heroTitleLine2": "Events & Registration Portal",
+  "welcomeMessage": "Welcome to the official events and technical symposium portal for EE - VLSI Design and Technology at Sri Shakthi Institute of Engineering & Technology. Explore our flagship symposiums, industry credit courses, and upcoming hackathons.",
+  "heroPrimaryBtnText": "Explore Upcoming Events",
+  "heroSecondaryBtnText": "Learn About VLSI Dept",
+  "heroCardTitle": "Department Overview",
+  "heroCardChip": "Active Term",
+  "heroCardNote": "Industry EDA tool suites: Cadence, Synopsys, Mentor & Xilinx",
+  "eventsSectionKicker": "Department Calendar",
+  "eventsSectionTitle": "Upcoming Events",
+  "filterAllText": "All Events",
+  "filterTab1Text": "Symposiums & Hackathons",
+  "filterTab2Text": "Industry Courses",
+  "aboutKicker": "Center of Excellence",
+  "aboutTitle": "Pioneering Microelectronics & Chip Design",
+  "aboutParagraph1": "The EE - VLSI Design and Technology program is committed to developing industry-ready engineers capable of designing complex modern integrated circuits (ICs), high-speed digital processors, analog/RF mixed-signal interfaces, and custom AI accelerator hardware.",
+  "aboutParagraph2": "Through hands-on workshops, faculty-guided tapeout programs, and regular industry masterclasses, students gain end-to-end expertise spanning architectural exploration, RTL verification, physical design, and post-silicon validation.",
+  "feature1Title": "RTL & ASIC Design",
+  "feature1Desc": "Verilog, SystemVerilog, UVM, and synthesis flows",
+  "feature2Title": "Analog & Mixed Signal",
+  "feature2Desc": "Cadence Virtuoso, Spectre, and RF layout design",
+  "feature3Title": "FPGA Acceleration",
+  "feature3Desc": "AMD Xilinx Vivado, PYNQ, and Vitis HLS",
+  "feature4Title": "Tapeout Opportunities",
+  "feature4Desc": "Shuttle tapeouts via commercial & open-source PDKs",
+  "cadPanelTitle": "Advanced VLSI CAD Laboratories",
+  "cadPanelSubtitle": "Equipped with tier-1 semiconductor software licenses and high-compute clusters for all department workshops:",
+  "cadToolsList": "Cadence Innovus, Cadence Virtuoso, Cadence Genus, Synopsys VCS, Synopsys Design Compiler, AMD Xilinx Vivado ML, Siemens QuestaSim, OpenROAD / SkyWater 130",
+  "cadNoteText": "Student Access Note: Workstation credentials and EDA tool VPN profiles are automatically generated and sent upon event registration approval.",
+  "departmentOffice": "VLSI Centre of Excellence, Sri Shakthi Campus, Coimbatore",
+  "contactEmail": "vlsi.events@siet.ac.in",
+  "labLocations": "Advanced Synopsys VLSI Lab (Room 302) • Embedded & FPGA Systems Center",
+  "footerTagline": "Sri Shakthi Institute of Engineering & Technology • Center for VLSI Design, Semiconductor Technology & Embedded Systems",
+  "footerCopyright": "© 2026 EE - VLSI DESIGN AND TECHNOLOGY • Sri Shakthi Institute of Engineering & Technology. All rights reserved.",
+  "registrationQrImage": "assets/registration-qr.svg",
+  "registrationQrTitle": "Scan QR Code for Registration",
+  "registrationQrInstructions": "Scan this QR code with any UPI app to complete registration fee verification, then submit your details below.",
+  "registrationQrNote": "Requires Admin Confirmation before seat is locked.",
+  "masterRegAccess": "per_event",
+  "regFormTitle": "Event Registration Form",
+  "regFormSupertitle": "Department Student Registration",
+  "regBtnTextActive": "Register",
+  "regBtnTextOpensSoon": "Opens Soon",
+  "regOpensSoonMessage": "Registration opens soon! The registration form will open only when access is granted by the department admin.",
+  "adminPin": "vlsi2026",
+  "labelFullName": "Full Name",
+  "labelEmail": "Email ID",
+  "labelCollege": "College / Institution Name",
+  "labelYear": "Studying Year",
+  "labelTransactionId": "Payment Transaction ID",
+  "placeholderTransactionId": "e.g. 429104829104 or UPI Ref ID",
+  "regSubmitBtnText": "Submit Registration for Verification",
+  "customFormFields": [
+    {
+      "id": "field_phone",
+      "label": "WhatsApp / Phone Number",
+      "type": "tel",
+      "placeholder": "e.g. +91 98765 43210",
+      "required": false
+    },
+    {
+      "id": "field_branch",
+      "label": "Department / Branch",
+      "type": "text",
+      "placeholder": "e.g. ECE, EEE, VLSI, CSE",
+      "required": false
+    }
+  ],
+  "emailSubject": "Thanks for registering! Your registration has been confirmed",
+  "emailHeading": "Registration Confirmed!",
+  "emailCustomMessage": "Thanks for registering! Your registration has been confirmed. We look forward to welcoming you to the event.",
+  "emailSignoff": "Department of EE - VLSI Design and Technology\nSri Shakthi Institute of Engineering & Technology, Coimbatore\nContact: vlsi.events@siet.ac.in",
+  "quickStats": [
+    {
+      "label": "Flagship Events",
+      "value": "3",
+      "icon": "calendar"
+    },
+    {
+      "label": "Industry Courses",
+      "value": "Synopsys",
+      "icon": "chip"
+    },
+    {
+      "label": "Active Edition",
+      "value": "2.0 Soon",
+      "icon": "zap"
+    },
+    {
+      "label": "Host College",
+      "value": "SIET",
+      "icon": "award"
+    }
+  ],
+  "tagline": "Sri Shakthi Institute of Engineering & Technology • Center for VLSI Design, Semiconductor Technology & Embedded Systems",
+  "academicYear": "Academic Year 2026 - 2027"
+};
+
+const DEFAULT_EVENTS_DATA = [
+  {
+    "id": "veltraxx-2",
+    "title": "VELTRAXX 2.0",
+    "category": "Competitions",
+    "categoryLabel": "Flagship Technical Symposium & Hackathon",
+    "status": "Open",
+    "statusLabel": "Registration Open",
+    "badgeColor": "indigo",
+    "isSample": false,
+    "shortSummary": "The next evolution of Sri Shakthi's premier national-level VLSI and electronics symposium! Featuring national hardware hackathons, industry keynotes, and exciting cash prizes.",
+    "description": "Get ready for VELTRAXX 2.0! Building upon the tremendous success of VELTRAXX'26, the second edition returns with expanded national competitive tracks: 24-Hour Silicon Hackathon, RISC-V SoC Architecture Design, Analog IC Layout Sprint, and exclusive networking with global semiconductor recruiters. Full event guidelines, schedule, and registration links will be released shortly.",
+    "eventDate": "Dates Announcing Soon",
+    "eventTime": "To Be Announced",
+    "registrationDeadline": "Opening Soon • Stay Tuned!",
+    "venue": "SRI SHAKTHI TECH PARK",
+    "venueType": "National On-Campus & Virtual Hybrid Fest",
+    "edaTools": [
+      "Cadence EDA Suite",
+      "Synopsys Design Compiler",
+      "OpenROAD / SkyWater 130nm",
+      "AMD Xilinx Vivado"
+    ],
+    "schedule": [
+      {
+        "time": "Phase 1",
+        "topic": "Grand Theme Reveal & Pre-Registration Launch"
+      },
+      {
+        "time": "Phase 2",
+        "topic": "National 24-Hour VLSI & Hardware Hackathon Kickoff"
+      },
+      {
+        "time": "Phase 3",
+        "topic": "Technical Paper Presentations & Circuit Debugging Contests"
+      },
+      {
+        "time": "Phase 4",
+        "topic": "Keynote Addresses from Global Semiconductor Leaders & Awards Gala"
+      }
+    ],
+    "coordinator": {
+      "name": "Department Faculty Chairs",
+      "role": "Faculty Coordinator, EE - VLSI",
+      "email": "vlsi.events@siet.ac.in"
+    },
+    "studentLead": {
+      "name": "Student Organizing Committee",
+      "role": "VELTRAXX 2.0 Student Leads",
+      "email": "vlsi.events@siet.ac.in"
+    },
+    "registrationUrl": "",
+    "theme": {
+      "primaryColor": "#e11d48",
+      "accentGradient": "linear-gradient(135deg, #e11d48 0%, #3b82f6 100%)",
+      "patternType": "wafer-grid",
+      "iconName": "zap"
+    },
+    "regControl": "open",
+    "registrationClosed": false,
+    "seatsAvailable": "Available"
+  },
+  {
+    "id": "veltraxx-26",
+    "title": "VELTRAXX'26",
+    "category": "Competitions",
+    "categoryLabel": "National Level Technical Symposium",
+    "status": "Completed",
+    "statusLabel": "Event Completed",
+    "badgeColor": "indigo",
+    "isSample": false,
+    "shortSummary": "The grand annual national-level technical symposium of the EE - VLSI Design and Technology Department featuring circuit design challenges, paper presentations, and tech expos.",
+    "description": "VELTRAXX'26 was the flagship annual national technical fest and symposium organized by the Department of EE - VLSI Design and Technology at Sri Shakthi Institute of Engineering & Technology. The symposium brought together bright engineering minds from across the state for competitive technical challenges, RTL design competitions, project exhibitions, and guest lectures by semiconductor industry experts.",
+    "eventDate": "Event Completed",
+    "eventTime": "Full Day Technical Symposium",
+    "registrationDeadline": "Registrations Closed",
+    "venue": "Sri Shakthi Auditorium & VLSI CAD Complex, SIET",
+    "venueType": "In-Person (Campus Event)",
+    "edaTools": [
+      "Cadence Virtuoso",
+      "Synopsys EDA",
+      "AMD Vivado",
+      "Proteus"
+    ],
+    "schedule": [
+      {
+        "time": "Session 1",
+        "topic": "Inauguration & Keynote Address on Semiconductor Innovation"
+      },
+      {
+        "time": "Session 2",
+        "topic": "Silicon Circuit Debugging & RTL Code Sprint"
+      },
+      {
+        "time": "Session 3",
+        "topic": "Technical Paper Presentations & Embedded Project Expo"
+      },
+      {
+        "time": "Session 4",
+        "topic": "Grand Valedictory & Prize Distribution"
+      }
+    ],
+    "coordinator": {
+      "name": "Department Faculty Coordinator",
+      "role": "Faculty Coordinator, EE - VLSI",
+      "email": "vlsi.events@siet.ac.in"
+    },
+    "studentLead": {
+      "name": "Student Organizing Committee",
+      "role": "VELTRAXX'26 Student Leads",
+      "email": "vlsi.events@siet.ac.in"
+    },
+    "registrationUrl": "",
+    "theme": {
+      "primaryColor": "#4f46e5",
+      "accentGradient": "linear-gradient(135deg, #4f46e5 0%, #3b82f6 100%)",
+      "patternType": "nanosheet",
+      "iconName": "zap"
+    },
+    "regControl": "closed"
+  },
+  {
+    "id": "synopsys-one-credit-course",
+    "title": "SYNOPSYS ONE CREDIT COURSE",
+    "category": "Workshops",
+    "categoryLabel": "Industry Certification Course",
+    "status": "Completed",
+    "statusLabel": "Event Completed",
+    "badgeColor": "teal",
+    "isSample": false,
+    "shortSummary": "Specialized one-credit industry certified training course on Synopsys EDA Tool Suite, covering ASIC frontend RTL synthesis, verification, and timing closure.",
+    "description": "An intensive, credit-earning technical course conducted in partnership with Synopsys. Students underwent rigorous hands-on laboratory sessions exploring the complete Synopsys ASIC design flow: RTL synthesis with Design Compiler, logic verification using VCS, and Static Timing Analysis (STA) with PrimeTime. Participants successfully completed their industry evaluation and received academic credits.",
+    "eventDate": "Event Completed",
+    "eventTime": "30 Contact Hours Hands-on Program",
+    "registrationDeadline": "Registrations Closed",
+    "deadlineTimestamp": "2026-01-01T00:00:00",
+    "venue": "Advanced Synopsys VLSI Lab (Room 302), SIET",
+    "venueType": "In-Person Hands-on CAD Workstations",
+    "seatsAvailable": "Completed Cohort",
+    "prerequisites": "Completed prerequisite curriculum in Digital IC Design.",
+    "edaTools": [
+      "Synopsys Design Compiler",
+      "Synopsys VCS",
+      "Synopsys PrimeTime",
+      "Custom Compiler"
+    ],
+    "coordinator": {
+      "name": "Course In-Charge",
+      "role": "Synopsys Certified Faculty Trainer",
+      "email": "synopsys.course@siet.ac.in"
+    },
+    "studentLead": {
+      "name": "Course Teaching Assistants",
+      "role": "VLSI Department Lab Fellows",
+      "email": "vlsi.events@siet.ac.in"
+    },
+    "schedule": [
+      {
+        "time": "Module 1",
+        "topic": "Digital IC Design Flow & Synthesis Constraints (.sdc, .lib)"
+      },
+      {
+        "time": "Module 2",
+        "topic": "Logic Synthesis Optimization with Synopsys Design Compiler"
+      },
+      {
+        "time": "Module 3",
+        "topic": "Functional Simulation & Code Coverage with Synopsys VCS"
+      },
+      {
+        "time": "Module 4",
+        "topic": "Static Timing Analysis (STA), Setup/Hold Slack & Sign-off Evaluation"
+      }
+    ],
+    "registrationUrl": "",
+    "featured": false,
+    "theme": {
+      "primaryColor": "#0284c7",
+      "accentGradient": "linear-gradient(135deg, #0f172a 0%, #1e40af 50%, #0284c7 100%)",
+      "patternType": "asic-routing",
+      "iconName": "cpu"
+    },
+    "regControl": "closed"
+  }
+];
+
+const DEFAULT_TICKER_ITEMS = [
+  {
+    "eventId": "veltraxx-2",
+    "text": "🔥 VELTRAXX 2.0",
+    "tag": "Registration open"
+  },
+  {
+    "eventId": "veltraxx-26",
+    "text": "VELTRAXX'26 — Event Completed",
+    "tag": "Completed"
+  },
+  {
+    "eventId": "synopsys-one-credit-course",
+    "text": "SYNOPSYS ONE CREDIT COURSE — Event Completed",
+    "tag": "Completed"
+  }
+];
+
+// Load from LocalStorage if user has client-side overrides, else use defaults
+function loadDepartmentState() {
+  let cfg = null;
+  let evs = null;
+  let tck = null;
+
+  try {
+    if (typeof localStorage !== 'undefined') {
+      const storedCfg = localStorage.getItem('vlsi_dept_config');
+      if (storedCfg) {
+        try { cfg = JSON.parse(storedCfg); } catch(e) {}
+      }
+
+      const storedEvs = localStorage.getItem('vlsi_events_data');
+      if (storedEvs) {
+        try {
+          const parsed = JSON.parse(storedEvs);
+          if (Array.isArray(parsed) && parsed.length > 0) {
+            evs = parsed;
+          }
+        } catch(e) {}
+      }
+
+      const storedTck = localStorage.getItem('vlsi_ticker_items');
+      if (storedTck) {
+        try {
+          const parsedTck = JSON.parse(storedTck);
+          if (Array.isArray(parsedTck) && parsedTck.length > 0) {
+            tck = parsedTck;
+          }
+        } catch(e) {}
+      }
+    }
+  } catch (err) {
+    console.warn('LocalStorage unavailable, using defaults');
+  }
+
+  let activeEvents = (Array.isArray(evs) && evs.length > 0) ? evs : [...DEFAULT_EVENTS_DATA];
+
+  activeEvents = activeEvents.map(ev => {
+    if (!ev || typeof ev !== 'object') return null;
+    if (!ev.theme) {
+      ev.theme = {
+        primaryColor: '#1d4ed8',
+        accentGradient: 'linear-gradient(135deg, #1e40af 0%, #1d4ed8 100%)',
+        patternType: 'wafer-grid',
+        iconName: 'chip'
+      };
+    }
+    if (!ev.status) {
+      ev.status = (ev.id === 'veltraxx-2') ? 'Coming Soon' : 'Completed';
+    }
+    if (!ev.statusLabel) {
+      if (ev.status === 'Completed') {
+        ev.statusLabel = 'Event Completed';
+      } else if (ev.status === 'Coming Soon') {
+        ev.statusLabel = 'Opens Soon';
+      } else if (ev.registrationClosed || ev.status === 'Closed') {
+        ev.statusLabel = 'Registration Closed';
+      } else {
+        ev.statusLabel = 'Registration Open';
+      }
+    }
+    if (!ev.regControl) {
+      ev.regControl = (ev.status === 'Coming Soon') ? 'opens_soon' : (ev.status === 'Open' ? 'open' : 'closed');
+    }
+    if (!ev.category) {
+      ev.category = 'Competitions';
+    }
+    return ev;
+  }).filter(Boolean);
+
+  if (activeEvents.length === 0) {
+    activeEvents = [...DEFAULT_EVENTS_DATA];
+  }
+
+  const activeConfig = cfg ? Object.assign({}, DEFAULT_DEPARTMENT_CONFIG, cfg) : DEFAULT_DEPARTMENT_CONFIG;
+  const activeTicker = (Array.isArray(tck) && tck.length > 0) ? tck : [...DEFAULT_TICKER_ITEMS];
+
+  return {
+    departmentConfig: activeConfig,
+    eventsData: activeEvents,
+    tickerItems: activeTicker
+  };
+}
+
+var _state = loadDepartmentState();
+var DEPARTMENT_CONFIG = _state.departmentConfig;
+var EVENTS_DATA = _state.eventsData;
+var TICKER_ITEMS = _state.tickerItems;
+
+function getEventById(id) {
+  return EVENTS_DATA.find(event => event.id === id) || null;
+}
+
+if (typeof window !== 'undefined') {
+  window.DEFAULT_DEPARTMENT_CONFIG = DEFAULT_DEPARTMENT_CONFIG;
+  window.DEFAULT_EVENTS_DATA = DEFAULT_EVENTS_DATA;
+  window.DEFAULT_TICKER_ITEMS = DEFAULT_TICKER_ITEMS;
+  window.DEPARTMENT_CONFIG = DEPARTMENT_CONFIG;
+  window.EVENTS_DATA = EVENTS_DATA;
+  window.TICKER_ITEMS = TICKER_ITEMS;
+  window.getEventById = getEventById;
+}
