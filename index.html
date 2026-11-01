@@ -1,0 +1,710 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EE - VLSI DESIGN AND TECHNOLOGY | Sri Shakthi Institute of Engineering & Technology</title>
+  <meta name="description" content="Official events, technical workshops, seminars, and hackathons portal for the Department of EE - VLSI Design and Technology.">
+  
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231d4ed8'><rect x='2' y='2' width='20' height='20' rx='4'/><rect x='6' y='6' width='12' height='12' fill='%23ffffff'/><text x='12' y='15' font-size='8' font-weight='bold' text-anchor='middle' fill='%231d4ed8'>VLSI</text></svg>">
+</head>
+<body>
+
+  <!-- Skip Link for Accessibility (WCAG 2.4.1) -->
+  <a href="#mainEventsContent" class="skip-link">Skip to main events content</a>
+
+  <!-- Official Department Announcement Banner -->
+  <aside class="demo-disclaimer-bar" aria-label="Department announcement">
+    <div class="container demo-disclaimer-content">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="demo-pill" style="background: #1d4ed8; color: #ffffff;" data-dept-field="announcementPill">Department Portal</span>
+        <span data-dept-field="announcementText">Official Event Hub • Department of EE - VLSI Design and Technology</span>
+      </div>
+      <div class="demo-actions">
+        <span class="quick-edit-hint" style="color: #b91c1c; font-weight: 700;" data-dept-field="announcementHighlight">🔥 VELTRAXX 2.0 Registration Opens Soon!</span>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Main Site Header with Department Name Clearly Displayed -->
+  <header class="site-header" role="banner">
+    <div class="container header-container">
+      <a href="index.html" class="brand-wrapper" aria-label="EE - VLSI DESIGN AND TECHNOLOGY Homepage">
+        <div class="brand-logo-icon" aria-hidden="true">
+          <!-- VLSI Microchip SVG Icon -->
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            <rect x="9" y="9" width="6" height="6"></rect>
+            <path d="M9 1v3"></path>
+            <path d="M15 1v3"></path>
+            <path d="M9 20v3"></path>
+            <path d="M15 20v3"></path>
+            <path d="M20 9h3"></path>
+            <path d="M20 14h3"></path>
+            <path d="M1 9h3"></path>
+            <path d="M1 14h3"></path>
+          </svg>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-supertitle" data-dept-field="institution">Sri Shakthi Institute of Engineering & Technology</span>
+          <span class="brand-title" data-dept-field="departmentName">EE - VLSI DESIGN AND TECHNOLOGY</span>
+          <span class="brand-subtitle-badge" data-dept-field="subtitleBadge">Events & Registration Portal</span>
+        </div>
+      </a>
+
+      <!-- Desktop Navigation -->
+      <nav class="main-nav" id="mainNav" aria-label="Primary navigation">
+        <a href="#eventsSection" class="nav-link active" data-dept-field="navLinkEvents">Upcoming Events</a>
+        <a href="#completedEventsAnchor" class="nav-link" data-dept-field="navLinkCompleted">Completed Events</a>
+        <a href="#departmentOverview" class="nav-link" data-dept-field="navLinkAbout">About Department</a>
+        <a href="#labsOverview" class="nav-link" data-dept-field="navLinkLabs">CAD Facilities</a>
+        <a href="#contactSection" class="nav-link" data-dept-field="navLinkContact">Contact</a>
+      </nav>
+
+      <div class="header-cta-group">
+        <a href="#eventsSection" class="btn-primary-nav" id="headerCtaBtn" data-dept-field="navCtaText">
+          Register for Events
+        </a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mainNav">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="3" y1="12" x2="21" y2="12"></line>
+            <line x1="3" y1="6" x2="21" y2="6"></line>
+            <line x1="3" y1="18" x2="21" y2="18"></line>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Continuously Scrolling Live Announcement Ticker (Requirement 4) -->
+  <!-- Automatically pauses on hover or keyboard focus -->
+  <section class="ticker-section" aria-label="Upcoming Events Live Ticker">
+    <div class="ticker-container">
+      <div class="ticker-badge">
+        <span class="ticker-live-dot" aria-hidden="true"></span>
+        <span>Latest Events</span>
+      </div>
+      
+      <div class="ticker-track-wrap" tabindex="0" aria-label="Upcoming event announcements ticker. Hover or focus to pause.">
+        <!-- Rendered dynamically by js/app.js -->
+        <div class="ticker-track" id="tickerTrack"></div>
+      </div>
+
+      <div class="ticker-controls">
+        <button type="button" class="ticker-toggle-btn" id="tickerToggleBtn" title="Pause Scrolling Ticker" aria-label="Pause Scrolling Ticker">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <rect x="6" y="4" width="4" height="16"></rect>
+            <rect x="14" y="4" width="4" height="16"></rect>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <main id="mainEventsContent">
+    <!-- Hero Section: Modern White Clean Layout -->
+    <section class="hero-section" aria-labelledby="heroTitle">
+      <div class="hero-circuit-pattern" aria-hidden="true"></div>
+      
+      <div class="container hero-content-grid">
+        <div class="hero-text-column">
+          <div class="hero-pill-badge">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+            </svg>
+            <span data-dept-field="heroBadge">Academic Year 2026 - 2027</span>
+          </div>
+
+          <h1 class="hero-title" id="heroTitle">
+            <span class="hero-title-gradient" data-dept-field="heroTitleLine1">EE - VLSI DESIGN AND TECHNOLOGY</span>
+            <br><span data-dept-field="heroTitleLine2">Events & Registration Portal</span>
+          </h1>
+
+          <p class="hero-lead" data-dept-field="welcomeMessage">
+            Welcome to the official events and student registration hub for EE - VLSI Design and Technology. Explore hands-on EDA tool workshops, distinguished industry lectures, and semiconductor design hackathons.
+          </p>
+
+          <div class="hero-cta-actions">
+            <a href="#eventsSection" class="btn-lg btn-primary" data-dept-field="heroPrimaryBtnText">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                <line x1="16" y1="2" x2="16" y2="6"></line>
+                <line x1="8" y1="2" x2="8" y2="6"></line>
+                <line x1="3" y1="10" x2="21" y2="10"></line>
+              </svg>
+              Explore Upcoming Events
+            </a>
+            <a href="#departmentOverview" class="btn-lg btn-secondary" data-dept-field="heroSecondaryBtnText">
+              Learn About VLSI Dept
+            </a>
+          </div>
+        </div>
+
+        <!-- Hero Stats & Highlights Card -->
+        <div class="hero-card-column">
+          <div class="hero-card">
+            <div class="hero-card-header">
+              <span class="hero-card-title" data-dept-field="heroCardTitle">Department Overview</span>
+              <span class="hero-card-chip" data-dept-field="heroCardChip">Active Term</span>
+            </div>
+
+            <div class="hero-stats-grid" id="heroStatsGrid">
+              <!-- Dynamically populated from DEPARTMENT_CONFIG -->
+            </div>
+
+            <div style="margin-top: 1.5rem; padding-top: 1.25rem; border-top: 1px solid var(--color-border);">
+              <div style="display: flex; align-items: center; gap: 0.5rem; font-size: 0.8125rem; color: var(--color-text-secondary);">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" aria-hidden="true">
+                  <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+                </svg>
+                <span data-dept-field="heroCardNote">Industry EDA tool suites: Cadence, Synopsys, Mentor & Xilinx</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Filter & Real-Time Search Toolbar (Requirement 6) -->
+    <nav class="filter-search-section" aria-label="Event filters and search">
+      <div class="container toolbar-layout">
+        <!-- Filter Tabs: All, Upcoming, Completed, Symposiums, Workshops -->
+        <div class="category-filter-group" role="tablist" aria-label="Filter events by category or status">
+          <button type="button" class="filter-btn active" data-category="All Events" role="tab" aria-selected="true">
+            <span data-dept-field="filterAllText">All Events</span>
+            <span class="filter-count-badge">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-category="Upcoming" role="tab" aria-selected="false">
+            <span>🔥 Upcoming Events</span>
+            <span class="filter-count-badge">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-category="Completed" role="tab" aria-selected="false">
+            <span>✅ Completed Events</span>
+            <span class="filter-count-badge">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-category="Competitions" role="tab" aria-selected="false">
+            <span data-dept-field="filterTab1Text">Symposiums & Hackathons</span>
+            <span class="filter-count-badge">0</span>
+          </button>
+          <button type="button" class="filter-btn" data-category="Workshops" role="tab" aria-selected="false">
+            <span data-dept-field="filterTab2Text">Industry Courses</span>
+            <span class="filter-count-badge">0</span>
+          </button>
+        </div>
+
+        <!-- Search Bar -->
+        <div class="search-wrapper">
+          <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+          </svg>
+          <input 
+            type="search" 
+            id="eventSearchInput" 
+            class="search-input" 
+            placeholder="Search by topic, status, EDA tool..." 
+            aria-label="Search department events"
+          >
+          <button type="button" class="search-clear-btn" id="searchClearBtn" aria-label="Clear search">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Events Section & Grid (Upcoming & Completed Events) -->
+    <section class="events-section" id="eventsSection" aria-labelledby="eventsSectionTitle">
+      <div class="container">
+        <div class="section-header-block">
+          <div>
+            <div class="section-kicker" data-dept-field="eventsSectionKicker">Department Calendar & Archive</div>
+            <h2 class="section-title" id="eventsSectionTitle" data-dept-field="eventsSectionTitle">Upcoming & Completed Events</h2>
+          </div>
+          <div class="events-results-meta" id="eventsResultsMeta">
+            Showing all scheduled events
+          </div>
+        </div>
+
+        <!-- Events Grid (Populated dynamically by js/app.js) -->
+        <div class="events-grid" id="eventsGrid" role="region" aria-live="polite">
+          <!-- Event Cards are inserted here -->
+        </div>
+
+        <!-- Empty State (When no event matches search/filter) -->
+        <div class="events-empty-state" id="eventsEmptyState" style="display: none;">
+          <svg class="empty-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+            <circle cx="11" cy="11" r="8"></circle>
+            <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+            <line x1="8" y1="11" x2="14" y2="11"></line>
+          </svg>
+          <h3 class="empty-title">No events match your criteria</h3>
+          <p class="empty-desc">Try clearing your search keyword or switching to another event category tab.</p>
+          <button type="button" class="btn-lg btn-primary" id="resetFiltersBtn">Reset All Filters</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Department Overview & Laboratories Section -->
+    <section class="dept-overview-section" id="departmentOverview" aria-labelledby="deptOverviewTitle">
+      <div class="container">
+        <div class="overview-grid">
+          <div>
+            <span class="overview-badge" data-dept-field="aboutKicker">Center of Excellence</span>
+            <h2 class="overview-title" id="deptOverviewTitle" data-dept-field="aboutTitle">Pioneering Microelectronics & Chip Design</h2>
+            <p class="overview-p" data-dept-field="aboutParagraph1">
+              The <strong>EE - VLSI Design and Technology</strong> program is committed to developing industry-ready engineers capable of designing complex modern integrated circuits (ICs), high-speed digital processors, analog/RF mixed-signal interfaces, and custom AI accelerator hardware.
+            </p>
+            <p class="overview-p" data-dept-field="aboutParagraph2">
+              Through hands-on workshops, faculty-guided tapeout programs, and regular industry masterclasses, students gain end-to-end expertise spanning architectural exploration, RTL verification, physical design, and post-silicon validation.
+            </p>
+
+            <div class="features-list">
+              <div class="feature-item">
+                <div class="feature-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="16 18 22 12 16 6"></polyline>
+                    <polyline points="8 6 2 12 8 18"></polyline>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="feature-title" data-dept-field="feature1Title">RTL & ASIC Design</h3>
+                  <p class="feature-desc" data-dept-field="feature1Desc">Verilog, SystemVerilog, UVM, and synthesis flows</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="2" y="2" width="20" height="20" rx="5"></rect>
+                    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="feature-title" data-dept-field="feature2Title">Analog & Mixed Signal</h3>
+                  <p class="feature-desc" data-dept-field="feature2Desc">Cadence Virtuoso, Spectre, and RF layout design</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                    <rect x="9" y="9" width="6" height="6"></rect>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="feature-title" data-dept-field="feature3Title">FPGA Acceleration</h3>
+                  <p class="feature-desc" data-dept-field="feature3Desc">AMD Xilinx Vivado, PYNQ, and Vitis HLS</p>
+                </div>
+              </div>
+
+              <div class="feature-item">
+                <div class="feature-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+                    <line x1="9" y1="9" x2="9.01" y2="9"></line>
+                    <line x1="15" y1="9" x2="15.01" y2="9"></line>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="feature-title" data-dept-field="feature4Title">Tapeout Opportunities</h3>
+                  <p class="feature-desc" data-dept-field="feature4Desc">Shuttle tapeouts via commercial & open-source PDKs</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- EDA & CAD Facilities Panel -->
+          <div class="overview-cad-panel" id="labsOverview">
+            <h3 class="cad-panel-title" data-dept-field="cadPanelTitle">Advanced VLSI CAD Laboratories</h3>
+            <p class="cad-panel-sub" data-dept-field="cadPanelSubtitle">Equipped with tier-1 semiconductor software licenses and high-compute clusters for all department workshops:</p>
+            
+            <div class="cad-tools-tags" id="cadToolsTagsList">
+              <span class="tool-tag">Cadence Innovus</span>
+              <span class="tool-tag">Cadence Virtuoso</span>
+              <span class="tool-tag">Cadence Genus</span>
+              <span class="tool-tag">Synopsys VCS</span>
+              <span class="tool-tag">Synopsys Design Compiler</span>
+              <span class="tool-tag">AMD Xilinx Vivado ML</span>
+              <span class="tool-tag">Siemens QuestaSim</span>
+              <span class="tool-tag">OpenROAD / SkyWater 130</span>
+            </div>
+
+            <div class="cad-highlight-box">
+              <p class="cad-highlight-text" data-dept-field="cadNoteText">
+                <strong>Student Access Note:</strong> Workstation credentials and EDA tool VPN profiles are automatically generated and sent upon event registration approval.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODAL 1: Dedicated Event Details View (Requirement 4)
+       ========================================================================= -->
+  <div 
+    class="modal-backdrop" 
+    id="eventDetailsModal" 
+    role="dialog" 
+    aria-modal="true" 
+    aria-labelledby="modalTitleText" 
+    aria-hidden="true"
+  >
+    <div class="modal-dialog">
+      <!-- Dynamic Banner with Themed Illustration -->
+      <div class="modal-header-banner" id="modalHeaderBanner">
+        <!-- Rendered dynamically by js/app.js -->
+      </div>
+
+      <div class="modal-body">
+        <!-- 16:9 Aspect Ratio Event Poster Display Box -->
+        <div id="modalPosterBox" class="modal-poster-ratio-box" style="display: none;">
+          <img id="modalPosterImg" src="" alt="Event Poster" class="modal-poster-img">
+          <span class="modal-ratio-badge">16:9 Ratio</span>
+        </div>
+
+        <!-- Key Info Grid -->
+        <div class="modal-info-bar">
+          <div class="info-bar-item">
+            <span class="info-bar-label">Event Date</span>
+            <span class="info-bar-value" id="modalDate">-</span>
+          </div>
+
+          <div class="info-bar-item">
+            <span class="info-bar-label">Timing</span>
+            <span class="info-bar-value" id="modalTime">-</span>
+          </div>
+
+          <div class="info-bar-item">
+            <span class="info-bar-label">Venue</span>
+            <span class="info-bar-value" id="modalVenue">-</span>
+          </div>
+
+          <div class="info-bar-item">
+            <span class="info-bar-label">Registration Deadline</span>
+            <span class="info-bar-value highlight-deadline" id="modalDeadline">-</span>
+          </div>
+        </div>
+
+        <!-- Event Overview & Description -->
+        <section class="modal-section">
+          <h3 class="modal-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" aria-hidden="true">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+              <polyline points="14 2 14 8 20 8"></polyline>
+              <line x1="16" y1="13" x2="8" y2="13"></line>
+              <line x1="16" y1="17" x2="8" y2="17"></line>
+            </svg>
+            Event Description & Syllabus
+          </h3>
+          <p class="modal-p" id="modalDesc">-</p>
+        </section>
+
+        <!-- Prerequisites & EDA Tools -->
+        <section class="modal-section">
+          <h3 class="modal-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+              <polyline points="22 4 12 14.01 9 11.01"></polyline>
+            </svg>
+            Prerequisites & EDA Tools
+          </h3>
+          <p class="modal-p" id="modalPrereq" style="margin-bottom: 0.75rem;">-</p>
+          <div class="cad-tools-tags" id="modalTools"></div>
+        </section>
+
+        <!-- Detailed Schedule (Requirement 4) -->
+        <section class="modal-section">
+          <h3 class="modal-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+            Schedule & Timeline
+          </h3>
+          <div class="schedule-timeline" id="modalSchedule"></div>
+        </section>
+
+        <!-- Coordinators / Contact -->
+        <section class="modal-section">
+          <h3 class="modal-section-title">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);" aria-hidden="true">
+              <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+              <circle cx="9" cy="7" r="4"></circle>
+              <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+              <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+            </svg>
+            Coordinators & Inquiries
+          </h3>
+          <div class="coordinators-grid" id="modalCoordinators"></div>
+        </section>
+      </div>
+
+      <!-- Modal Action Footer -->
+      <div class="modal-footer">
+        <div class="modal-footer-left">
+          <a href="#" id="modalDirectPageLink" class="footer-link" target="_blank" rel="noopener">
+            Open in dedicated page view ↗
+          </a>
+        </div>
+        <div class="modal-footer-btns">
+          <button type="button" class="btn-lg btn-secondary" id="modalCloseBtn">Close</button>
+          <button type="button" class="btn-lg btn-primary" id="modalRegisterBtn">
+            Register for this Event
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+              <polyline points="12 5 19 12 12 19"></polyline>
+            </svg>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL 2: Interactive Student Registration Form
+       ========================================================================= -->
+  <div 
+    class="modal-backdrop" 
+    id="registrationModal" 
+    role="dialog" 
+    aria-modal="true" 
+    aria-labelledby="regModalTitle" 
+    aria-hidden="true"
+  >
+    <div class="modal-dialog reg-modal-dialog">
+      <div class="modal-body" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 1.25rem;">
+          <div>
+            <span class="brand-supertitle">Department Student Registration</span>
+            <h2 class="modal-title" id="regModalTitle" style="color: var(--color-text-primary); margin-top: 0.25rem;">Event Registration</h2>
+          </div>
+          <button type="button" class="modal-close-btn" id="regModalCloseBtn" aria-label="Close registration form" style="color: #64748b; background: #f1f5f9;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <!-- Registration Form Body -->
+        <div id="regFormBody">
+          <div class="reg-event-badge">
+            Registering for: <strong id="regEventName">-</strong>
+          </div>
+
+          <!-- QR Code Showcase Block -->
+          <div class="reg-qr-container">
+            <div class="reg-qr-image-wrapper">
+              <img id="regModalQrImg" src="assets/registration-qr.svg" alt="Registration QR Code" class="reg-qr-img">
+            </div>
+            <div class="reg-qr-text">
+              <div class="reg-qr-title" data-dept-field="registrationQrTitle">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="color: var(--color-primary);">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+                Scan QR Code for Registration
+              </div>
+              <p class="reg-qr-instructions" id="regQrInstructions" data-dept-field="registrationQrInstructions">
+                Scan this QR code with any UPI app to complete registration fee verification, then submit your details below.
+              </p>
+              <div class="reg-qr-note" data-dept-field="registrationQrNote">
+                ℹ️ Requires Department Confirmation before seat is locked.
+              </div>
+            </div>
+          </div>
+
+          <form id="registrationForm" novalidate>
+            <div class="form-group">
+              <label for="regFullName" class="form-label" id="lblFullName">Full Name <span class="required-mark">*</span></label>
+              <input type="text" id="regFullName" class="form-input" placeholder="e.g. Aditi Sharma" required autocomplete="name">
+            </div>
+
+            <div class="form-group">
+              <label for="regEmail" class="form-label" id="lblEmail">Email ID <span class="required-mark">*</span></label>
+              <input type="email" id="regEmail" class="form-input" placeholder="e.g. aditi.sharma@gmail.com" required autocomplete="email">
+              <div class="form-hint">Your confirmation email will be delivered to this address once approved.</div>
+            </div>
+
+            <div class="form-group">
+              <label for="regCollegeName" class="form-label" id="lblCollege">College / Institution Name <span class="required-mark">*</span></label>
+              <input type="text" id="regCollegeName" class="form-input" placeholder="e.g. Sri Shakthi Institute of Engineering & Technology" required>
+            </div>
+
+            <div class="form-row-2col">
+              <div class="form-group">
+                <label for="regYear" class="form-label" id="lblYear">Studying Year <span class="required-mark">*</span></label>
+                <select id="regYear" class="form-select" required>
+                  <option value="1st Year Engineering">1st Year Engineering</option>
+                  <option value="2nd Year Engineering">2nd Year Engineering</option>
+                  <option value="3rd Year Engineering" selected>3rd Year Engineering</option>
+                  <option value="4th Year / Final Year">4th Year / Final Year</option>
+                  <option value="M.Tech / Post Graduate">M.Tech / Post Graduate</option>
+                  <option value="Ph.D. / Research Scholar">Ph.D. / Research Scholar</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="regTransactionId" class="form-label" id="lblTransactionId">Payment Transaction ID</label>
+                <input type="text" id="regTransactionId" class="form-input" placeholder="e.g. 429104829104 or UPI Ref ID">
+              </div>
+            </div>
+
+            <!-- Dynamic Custom Form Fields Configured via Admin Portal -->
+            <div id="dynamicFormFieldsContainer" style="display: flex; flex-direction: column; gap: 1rem; margin-top: 0.5rem;"></div>
+
+            <div style="margin-top: 1.5rem; display: flex; gap: 0.75rem; justify-content: flex-end;">
+              <button type="submit" id="regSubmitBtn" class="btn-lg btn-primary" style="width: 100%; justify-content: center;">
+                Submit Registration for Verification
+              </button>
+            </div>
+          </form>
+        </div>
+
+        <!-- Registration Pending Confirmation View -->
+        <div id="regSuccessView" class="reg-success-container" style="display: none;">
+          <div class="reg-success-icon" style="background: #fffbeb; color: #b45309;" aria-hidden="true">
+            <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <circle cx="12" cy="12" r="10"></circle>
+              <polyline points="12 6 12 12 16 14"></polyline>
+            </svg>
+          </div>
+          <h3 class="reg-success-title" style="color: #92400e;">Registration Submitted!</h3>
+          <div style="margin: 0.5rem auto 1.25rem;">
+            <span class="status-pill status-pending-pill">⏳ Pending Department Confirmation</span>
+          </div>
+          <p class="reg-success-desc">
+            Your registration has been submitted and is currently being verified by the Department Coordinator. Once approved, you will receive an email: <strong>"Thanks for registering! Your registration has been confirmed."</strong>
+          </p>
+
+          <div class="reg-pass-card">
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Event:</span>
+              <span class="reg-pass-value" id="regPassEventName">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Student Name:</span>
+              <span class="reg-pass-value" id="regPassStudentName">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Email:</span>
+              <span class="reg-pass-value" id="regPassEmail">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">College Name:</span>
+              <span class="reg-pass-value" id="regPassCollege">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Studying Year:</span>
+              <span class="reg-pass-value" id="regPassYear">-</span>
+            </div>
+            <div class="reg-pass-field" id="regPassTxnRow">
+              <span class="reg-pass-label">Transaction ID:</span>
+              <span class="reg-pass-value" id="regPassTxnId">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Submission Token:</span>
+              <span class="reg-pass-value" style="color: #b45309;" id="regPassId">-</span>
+            </div>
+            <div class="reg-pass-field">
+              <span class="reg-pass-label">Current Status:</span>
+              <span class="reg-pass-value" style="color: #b45309;">Pending Coordinator Approval</span>
+            </div>
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: center; flex-wrap: wrap;">
+            <button type="button" class="btn-lg btn-primary" id="regSuccessCloseBtn">
+              Done
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer" id="contactSection" role="contentinfo">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div>
+          <div class="footer-brand-title" data-dept-field="departmentName">EE - VLSI DESIGN AND TECHNOLOGY</div>
+          <p class="footer-brand-desc" data-dept-field="footerTagline">
+            Pioneering Semiconductor Innovation, Microelectronics & Next-Generation SoC Architecture.
+          </p>
+          <div style="font-size: 0.8125rem; color: var(--color-text-muted);">
+            Institution: <strong data-dept-field="institution">Sri Shakthi Institute of Engineering & Technology</strong>
+          </div>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Quick Links</h3>
+          <ul class="footer-links-list">
+            <li><a href="#eventsSection" class="footer-link">Upcoming Events</a></li>
+            <li><a href="#eventsSection" class="footer-link">Hands-on Workshops</a></li>
+            <li><a href="#eventsSection" class="footer-link">Industry Seminars</a></li>
+            <li><a href="#eventsSection" class="footer-link">SiliconSprint Hackathon</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Laboratories</h3>
+          <ul class="footer-links-list">
+            <li><a href="#labsOverview" class="footer-link">VLSI CAD Center (302)</a></li>
+            <li><a href="#labsOverview" class="footer-link">Analog Microelectronics (105)</a></li>
+            <li><a href="#labsOverview" class="footer-link">FPGA & Embedded Lab (214)</a></li>
+            <li><a href="#labsOverview" class="footer-link">Computing Cluster</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h3 class="footer-heading">Department Office</h3>
+          <div class="footer-contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+              <circle cx="12" cy="10" r="3"></circle>
+            </svg>
+            <span data-dept-field="departmentOffice">VLSI & Microelectronics Complex, Room EE-310</span>
+          </div>
+
+          <div class="footer-contact-item">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
+              <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+              <polyline points="22,6 12,13 2,6"></polyline>
+            </svg>
+            <span data-dept-field="contactEmail">vlsi.events@ee-dept.edu</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom-bar">
+        <div data-dept-field="footerCopyright">
+          © 2026 EE - VLSI DESIGN AND TECHNOLOGY • Sri Shakthi Institute of Engineering & Technology. All rights reserved.
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/events-data.js"></script>
+  <script src="js/illustrations.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Event Details | EE - VLSI DESIGN AND TECHNOLOGY</title>
+  <meta name="description" content="Detailed schedule, syllabus, venue, and registration instructions for department events in EE - VLSI Design and Technology.">
+
+  <!-- Google Fonts: Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231d4ed8'><rect x='2' y='2' width='20' height='20' rx='4'/><rect x='6' y='6' width='12' height='12' fill='%23ffffff'/><text x='12' y='15' font-size='8' font-weight='bold' text-anchor='middle' fill='%231d4ed8'>VLSI</text></svg>">
+</head>
+<body>
+
+  <!-- Skip Link -->
+  <a href="#eventDetailsContainer" class="skip-link">Skip to event details</a>
+
+  <!-- Top Announcement Banner -->
+  <aside class="demo-disclaimer-bar">
+    <div class="container demo-disclaimer-content">
+      <div style="display: flex; align-items: center; gap: 0.5rem;">
+        <span class="demo-pill" style="background: #1d4ed8; color: #ffffff;">Department Event</span>
+        <span>EE - VLSI Design and Technology • Sri Shakthi Institute of Engineering & Technology</span>
+      </div>
+      <div class="demo-actions">
+        <a href="index.html" class="quick-edit-hint" style="text-decoration: underline; color: inherit;">← Back to Home & All Events</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Site Header -->
+  <header class="site-header">
+    <div class="container header-container">
+      <a href="index.html" class="brand-wrapper">
+        <div class="brand-logo-icon" aria-hidden="true">
+          <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            <rect x="9" y="9" width="6" height="6"></rect>
+            <path d="M9 1v3"></path>
+            <path d="M15 1v3"></path>
+            <path d="M9 20v3"></path>
+            <path d="M15 20v3"></path>
+            <path d="M20 9h3"></path>
+            <path d="M20 14h3"></path>
+            <path d="M1 9h3"></path>
+            <path d="M1 14h3"></path>
+          </svg>
+        </div>
+        <div class="brand-text-block">
+          <span class="brand-supertitle" data-dept-field="institution">Sri Shakthi Institute of Engineering & Technology</span>
+          <span class="brand-title" data-dept-field="departmentName">EE - VLSI DESIGN AND TECHNOLOGY</span>
+          <span class="brand-subtitle-badge">Event Information & Registration</span>
+        </div>
+      </a>
+
+      <nav class="main-nav" aria-label="Navigation">
+        <a href="index.html" class="nav-link">Home</a>
+        <a href="index.html#eventsSection" class="nav-link active">All Events</a>
+        <a href="index.html#departmentOverview" class="nav-link">About VLSI</a>
+        <a href="index.html#contactSection" class="nav-link">Contact</a>
+      </nav>
+
+      <div class="header-cta-group">
+        <a href="index.html#eventsSection" class="btn-primary-nav">
+          ← All Events
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Breadcrumb Navigation -->
+  <nav class="breadcrumb-nav" aria-label="Breadcrumb">
+    <div class="container">
+      <ul class="breadcrumb-list">
+        <li class="breadcrumb-item"><a href="index.html">Department Home</a></li>
+        <li class="breadcrumb-sep">/</li>
+        <li class="breadcrumb-item"><a href="index.html#eventsSection">Events Calendar</a></li>
+        <li class="breadcrumb-sep">/</li>
+        <li class="breadcrumb-item breadcrumb-current" id="breadcrumbTitle" aria-current="page">Event Details</li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Main Content Container (Populated by js/event-details.js) -->
+  <main class="container" id="eventDetailsContainer">
+    <div style="padding: 4rem 0; text-align: center; color: var(--color-text-muted);">
+      Loading event details...
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-bottom-bar" style="border-top: none; padding-top: 0;">
+        <div>
+          © 2026 <strong>EE - VLSI DESIGN AND TECHNOLOGY</strong>. All rights reserved.
+        </div>
+        <div>
+          <a href="index.html" class="footer-link">Back to Main Events Portal</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="js/events-data.js"></script>
+  <script src="js/illustrations.js"></script>
+  <script src="js/event-details.js"></script>
+</body>
+</html>

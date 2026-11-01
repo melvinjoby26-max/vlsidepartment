@@ -1,0 +1,1297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Portal | EE - VLSI DESIGN AND TECHNOLOGY</title>
+  <meta name="description" content="Department Admin Control Panel for EE - VLSI Design and Technology. Manage events, continuous ticker announcements, posters, emails, and website content.">
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@500;600&display=swap" rel="stylesheet">
+  
+  <!-- CSS -->
+  <link rel="stylesheet" href="css/styles.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%231d4ed8'><rect x='2' y='2' width='20' height='20' rx='4'/><path d='M12 15a3 3 0 1 0 0-6 3 3 0 0 0 0 6Z' fill='%23fff'/></svg>">
+</head>
+<body class="admin-body">
+
+  <!-- PIN Protection Gate Overlay -->
+  <div class="pin-gate-overlay" id="pinGateOverlay">
+    <div class="pin-card">
+      <div class="pin-icon">
+        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+        </svg>
+      </div>
+      <h2 style="font-size: 1.5rem; font-weight: 800; color: var(--color-text-primary); margin-bottom: 0.5rem;">Admin Access</h2>
+      <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1.5rem;">
+        Enter your Department Admin PIN to manage events, draft emails, ticker bar, and website content.
+      </p>
+
+      <form id="pinForm">
+        <input type="password" id="adminPinInput" class="pin-input" placeholder="••••••••" maxlength="12" autofocus autocomplete="current-password">
+        <div style="font-size: 0.75rem; color: var(--color-text-muted); margin-bottom: 1.25rem;" id="pinGateHint">
+          Default PIN: <code>vlsi2026</code> (Can be changed inside)
+        </div>
+        <button type="submit" class="btn-lg btn-primary" style="width: 100%; justify-content: center;">
+          Unlock Admin Portal
+        </button>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Top Navigation Bar -->
+  <header class="admin-navbar">
+    <div class="container admin-nav-container">
+      <div class="admin-brand">
+        <div class="brand-logo-icon" style="width: 38px; height: 38px;">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+            <path d="M9 1v3M15 1v3M9 20v3M15 20v3M20 9h3M20 14h3M1 9h3M1 14h3"></path>
+          </svg>
+        </div>
+        <div>
+          <div style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary);" id="adminNavCollege">Sri Shakthi Institute of Engineering & Technology</div>
+          <div style="font-size: 1rem; font-weight: 800; color: var(--color-text-primary); display: flex; align-items: center; gap: 0.5rem;">
+            EE - VLSI Admin Portal <span class="admin-badge">Staff Mode</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="admin-actions-bar">
+        <button type="button" class="btn-lg btn-primary" id="saveAllBtn" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+            <polyline points="17 21 17 13 7 13 7 21"></polyline>
+            <polyline points="7 3 7 8 15 8"></polyline>
+          </svg>
+          Save All to Disk
+        </button>
+
+        <button type="button" class="btn-icon-action" id="openMobileModalBtn" style="color: #1d4ed8; font-weight: 700;">
+          📱 Open on Mobile
+        </button>
+
+        <button type="button" class="btn-icon-action" id="openChangePinBtn" style="color: #4f46e5; font-weight: 700; border-color: #c7d2fe;">
+          🔑 Change PIN
+        </button>
+
+        <a href="index.html" target="_blank" class="btn-lg btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.875rem;">
+          View Public Site ↗
+        </a>
+
+        <button type="button" class="btn-icon-action" id="lockAdminBtn" title="Lock Portal">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+            <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+          </svg>
+          Lock
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Admin Dashboard Container -->
+  <main class="admin-container">
+    <!-- Admin Navigation Tabs -->
+    <nav class="admin-tabs-nav" role="tablist">
+      <button class="admin-tab-btn active" data-tab="eventsTab" role="tab" aria-selected="true">
+        📅 Events Manager
+      </button>
+      <button class="admin-tab-btn" data-tab="siteTextsTab" role="tab" aria-selected="false">
+        📝 Website Texts & Content
+      </button>
+      <button class="admin-tab-btn" data-tab="emailTab" role="tab" aria-selected="false">
+        ✉️ Draft Mail Template
+      </button>
+      <button class="admin-tab-btn" data-tab="tickerTab" role="tab" aria-selected="false">
+        ⚡ Scrolling Ticker
+      </button>
+      <button class="admin-tab-btn" data-tab="deptTab" role="tab" aria-selected="false">
+        🏛️ About Department
+      </button>
+      <button class="admin-tab-btn" data-tab="regsTab" role="tab" aria-selected="false">
+        👥 Student Registrations
+      </button>
+      <button class="admin-tab-btn" data-tab="backupTab" role="tab" aria-selected="false">
+        💾 Backup & Sync
+      </button>
+    </nav>
+
+    <!-- =====================================================================
+         TAB 1: EVENTS MANAGER
+         ===================================================================== -->
+    <section class="admin-tab-panel active" id="eventsTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Department Events & Fests</h2>
+            <p class="admin-card-desc">Add new technical symposiums, workshops, courses, or hackathons and manage their live status and 16:9 posters.</p>
+          </div>
+          <button type="button" class="btn-lg btn-primary" id="openAddEventModalBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add New Event
+          </button>
+        </div>
+
+        <!-- Master Registration Form Access Quick Control Banner -->
+        <div class="admin-reg-access-bar" style="background: #f8fafc; border: 1px solid var(--color-border); padding: 1.15rem 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.75rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; box-shadow: 0 1px 3px rgba(0,0,0,0.04);">
+          <div style="flex: 1; min-width: 260px;">
+            <div style="display: flex; align-items: center; gap: 0.5rem;">
+              <span style="font-size: 1.1rem;">🔒</span>
+              <h3 style="font-weight: 800; font-size: 1rem; color: var(--color-text-primary); margin: 0;">Registration Form Access Control</h3>
+            </div>
+            <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0.25rem 0 0;">
+              When set to <strong>Opens Soon</strong> or <strong>Closed</strong>, the registration form is locked and <strong>cannot open</strong>. Only when you give access can students register.
+            </p>
+          </div>
+          <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap;">
+            <label for="masterRegAccessSelect" style="font-size: 0.8125rem; font-weight: 700; color: var(--color-text-secondary);">Master Access:</label>
+            <select id="masterRegAccessSelect" class="form-select" style="max-width: 230px; font-weight: 700; padding: 0.45rem 0.75rem;">
+              <option value="per_event">⚙️ Per-Event Control</option>
+              <option value="open">🟢 Give Access (All Open)</option>
+              <option value="opens_soon">🔥 Opens Soon (Forms Locked)</option>
+              <option value="closed">🔴 Closed (Forms Locked)</option>
+            </select>
+          </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="admin-events-table">
+            <thead>
+              <tr>
+                <th>Event & Poster</th>
+                <th>Category</th>
+                <th>Status</th>
+                <th>Registration Control</th>
+                <th>Date / Time</th>
+                <th>Deadline / Info</th>
+                <th style="text-align: right;">Actions</th>
+              </tr>
+            </thead>
+            <tbody id="adminEventsTableBody">
+              <!-- Rendered dynamically by js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 2: WEBSITE CONTENT & TEXT EDITOR (Edit Every Single Text)
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="siteTextsTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Website Content & Text Editor</h2>
+            <p class="admin-card-desc">Edit every single text on the website without touching code. Click "Save All Website Text" to apply changes live.</p>
+          </div>
+          <button type="button" class="btn-lg btn-primary" id="saveSiteTextsBtn">
+            💾 Save All Website Text
+          </button>
+        </div>
+
+        <form id="siteTextsForm">
+          <!-- Section 1: Announcement Bar -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">1. Top Announcement Bar</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_announcementPill">Banner Tag / Pill</label>
+                <input type="text" id="st_announcementPill" class="form-input" data-config-key="announcementPill">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_announcementHighlight">Banner Highlight Text</label>
+                <input type="text" id="st_announcementHighlight" class="form-input" data-config-key="announcementHighlight">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_announcementText">Banner Main Message</label>
+                <input type="text" id="st_announcementText" class="form-input" data-config-key="announcementText">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 2: Header & Navigation -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">2. Navigation & Header CTA</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_institution">College / Institution Name</label>
+                <input type="text" id="st_institution" class="form-input" data-config-key="institution">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_departmentName">Department Name</label>
+                <input type="text" id="st_departmentName" class="form-input" data-config-key="departmentName">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_subtitleBadge">Header Subtitle Badge</label>
+                <input type="text" id="st_subtitleBadge" class="form-input" data-config-key="subtitleBadge">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_navCtaText">Header Register Button Text</label>
+                <input type="text" id="st_navCtaText" class="form-input" data-config-key="navCtaText">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_navLinkEvents">Nav Link: Events</label>
+                <input type="text" id="st_navLinkEvents" class="form-input" data-config-key="navLinkEvents">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_navLinkAbout">Nav Link: About</label>
+                <input type="text" id="st_navLinkAbout" class="form-input" data-config-key="navLinkAbout">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_navLinkLabs">Nav Link: CAD Labs</label>
+                <input type="text" id="st_navLinkLabs" class="form-input" data-config-key="navLinkLabs">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_navLinkContact">Nav Link: Contact</label>
+                <input type="text" id="st_navLinkContact" class="form-input" data-config-key="navLinkContact">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 3: Hero Section -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">3. Hero Homepage Section</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_heroBadge">Academic Year Badge</label>
+                <input type="text" id="st_heroBadge" class="form-input" data-config-key="heroBadge">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroTitleLine1">Hero Title Line 1</label>
+                <input type="text" id="st_heroTitleLine1" class="form-input" data-config-key="heroTitleLine1">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroTitleLine2">Hero Title Line 2</label>
+                <input type="text" id="st_heroTitleLine2" class="form-input" data-config-key="heroTitleLine2">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroPrimaryBtnText">Primary Button Text</label>
+                <input type="text" id="st_heroPrimaryBtnText" class="form-input" data-config-key="heroPrimaryBtnText">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroSecondaryBtnText">Secondary Button Text</label>
+                <input type="text" id="st_heroSecondaryBtnText" class="form-input" data-config-key="heroSecondaryBtnText">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroCardTitle">Hero Card Title</label>
+                <input type="text" id="st_heroCardTitle" class="form-input" data-config-key="heroCardTitle">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_heroCardChip">Hero Card Badge</label>
+                <input type="text" id="st_heroCardChip" class="form-input" data-config-key="heroCardChip">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_heroCardNote">Hero Card Bottom Note</label>
+                <input type="text" id="st_heroCardNote" class="form-input" data-config-key="heroCardNote">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_welcomeMessage">Hero Welcome / Lead Paragraph</label>
+                <textarea id="st_welcomeMessage" class="form-textarea" rows="3" data-config-key="welcomeMessage"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 4: Events Section Header & Filter Tabs -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">4. Events Calendar Section Header & Filter Tabs</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_eventsSectionKicker">Section Kicker Tag</label>
+                <input type="text" id="st_eventsSectionKicker" class="form-input" data-config-key="eventsSectionKicker">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_eventsSectionTitle">Section Main Heading</label>
+                <input type="text" id="st_eventsSectionTitle" class="form-input" data-config-key="eventsSectionTitle">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_filterAllText">Filter Tab 1: All Events</label>
+                <input type="text" id="st_filterAllText" class="form-input" data-config-key="filterAllText">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_filterTab1Text">Filter Tab 2: Symposiums</label>
+                <input type="text" id="st_filterTab1Text" class="form-input" data-config-key="filterTab1Text">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_filterTab2Text">Filter Tab 3: Courses</label>
+                <input type="text" id="st_filterTab2Text" class="form-input" data-config-key="filterTab2Text">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 5: About Department Section -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">5. About Department & Microelectronics Overview</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_aboutKicker">Overview Badge / Kicker</label>
+                <input type="text" id="st_aboutKicker" class="form-input" data-config-key="aboutKicker">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_aboutTitle">Section Heading</label>
+                <input type="text" id="st_aboutTitle" class="form-input" data-config-key="aboutTitle">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_aboutParagraph1">Overview Paragraph 1</label>
+                <textarea id="st_aboutParagraph1" class="form-textarea" rows="3" data-config-key="aboutParagraph1"></textarea>
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_aboutParagraph2">Overview Paragraph 2</label>
+                <textarea id="st_aboutParagraph2" class="form-textarea" rows="3" data-config-key="aboutParagraph2"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 6: Four Department Core Pillars / Features -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">6. Department Core Pillars (4 Features)</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_feature1Title">Feature 1 Title</label>
+                <input type="text" id="st_feature1Title" class="form-input" data-config-key="feature1Title">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_feature1Desc">Feature 1 Description</label>
+                <input type="text" id="st_feature1Desc" class="form-input" data-config-key="feature1Desc">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_feature2Title">Feature 2 Title</label>
+                <input type="text" id="st_feature2Title" class="form-input" data-config-key="feature2Title">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_feature2Desc">Feature 2 Description</label>
+                <input type="text" id="st_feature2Desc" class="form-input" data-config-key="feature2Desc">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_feature3Title">Feature 3 Title</label>
+                <input type="text" id="st_feature3Title" class="form-input" data-config-key="feature3Title">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_feature3Desc">Feature 3 Description</label>
+                <input type="text" id="st_feature3Desc" class="form-input" data-config-key="feature3Desc">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_feature4Title">Feature 4 Title</label>
+                <input type="text" id="st_feature4Title" class="form-input" data-config-key="feature4Title">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_feature4Desc">Feature 4 Description</label>
+                <input type="text" id="st_feature4Desc" class="form-input" data-config-key="feature4Desc">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 7: Advanced CAD Laboratories Panel -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">7. Advanced VLSI CAD Laboratories Panel</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_cadPanelTitle">CAD Panel Title</label>
+                <input type="text" id="st_cadPanelTitle" class="form-input" data-config-key="cadPanelTitle">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_cadPanelSubtitle">CAD Panel Subtitle</label>
+                <input type="text" id="st_cadPanelSubtitle" class="form-input" data-config-key="cadPanelSubtitle">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_cadToolsList">EDA Tools Badges List (comma-separated)</label>
+                <input type="text" id="st_cadToolsList" class="form-input" data-config-key="cadToolsList">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_cadNoteText">CAD Access Highlight Note</label>
+                <textarea id="st_cadNoteText" class="form-textarea" rows="2" data-config-key="cadNoteText"></textarea>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 8: Contact & Footer Texts -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">8. Contact Information & Footer Texts</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_contactEmail">Contact Email Address</label>
+                <input type="email" id="st_contactEmail" class="form-input" data-config-key="contactEmail">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_departmentOffice">Office Location</label>
+                <input type="text" id="st_departmentOffice" class="form-input" data-config-key="departmentOffice">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_footerTagline">Footer Tagline</label>
+                <input type="text" id="st_footerTagline" class="form-input" data-config-key="footerTagline">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_footerCopyright">Footer Copyright Line</label>
+                <input type="text" id="st_footerCopyright" class="form-input" data-config-key="footerCopyright">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 9: Registration QR Code Photo & Instructions -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">9. Registration QR Photo & Instructions</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_registrationQrTitle">QR Section Title</label>
+                <input type="text" id="st_registrationQrTitle" class="form-input" data-config-key="registrationQrTitle">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="st_registrationQrNote">QR Verification Note</label>
+                <input type="text" id="st_registrationQrNote" class="form-input" data-config-key="registrationQrNote">
+              </div>
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_registrationQrInstructions">QR Instructions for Students</label>
+                <input type="text" id="st_registrationQrInstructions" class="form-input" data-config-key="registrationQrInstructions">
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 10: Registration Form Name & Access Controls -->
+          <div class="admin-text-section-box">
+            <h3 class="text-section-title">10. Registration Form Name & Access Controls</h3>
+            <div class="dept-form-grid">
+              <div class="form-group">
+                <label class="form-label" for="st_masterRegAccess">Master Registration Form Access</label>
+                <select id="st_masterRegAccess" class="form-select" data-config-key="masterRegAccess">
+                  <option value="per_event">⚙️ Use Per-Event Settings</option>
+                  <option value="open">🟢 Give Access (All Open - Forms Open)</option>
+                  <option value="opens_soon">🔥 Opens Soon (Shows "Opens Soon" - Forms Locked)</option>
+                  <option value="closed">🔴 Stop Registration (Closed - Forms Locked)</option>
+                </select>
+                <div class="form-hint">Controls whether registration forms can open on the website.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_regFormTitle">Registration Form Text Title / Name</label>
+                <input type="text" id="st_regFormTitle" class="form-input" data-config-key="regFormTitle" placeholder="e.g. Event Registration Form">
+                <div class="form-hint">Main heading displayed on the registration form modal.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_regFormSupertitle">Registration Form Super-title</label>
+                <input type="text" id="st_regFormSupertitle" class="form-input" data-config-key="regFormSupertitle" placeholder="e.g. Department Student Registration">
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_regBtnTextStopped">Button Text When Stopped</label>
+                <input type="text" id="st_regBtnTextStopped" class="form-input" data-config-key="regBtnTextStopped" placeholder="e.g. Begins Soon">
+                <div class="form-hint">Text shown on event cards when registration is stopped.</div>
+              </div>
+
+              <div class="form-group">
+                <label class="form-label" for="st_regBtnTextActive">Button Text When Access is Given (Open)</label>
+                <input type="text" id="st_regBtnTextActive" class="form-input" data-config-key="regBtnTextActive" placeholder="e.g. Register">
+              </div>
+
+              <div class="form-group dept-form-full">
+                <label class="form-label" for="st_regStoppedMessage">Notice Message When User Clicks Stopped Form</label>
+                <input type="text" id="st_regStoppedMessage" class="form-input" data-config-key="regStoppedMessage" placeholder="e.g. Registration begins soon. The registration form is currently locked by the department admin and will open soon.">
+                <div class="form-hint">Notification shown to users explaining that registration begins soon when the form is locked.</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Section 11: Registration Form Questions & Custom Fields Builder -->
+          <div class="admin-text-section-box">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.75rem;">
+              <div>
+                <h3 class="text-section-title" style="margin-bottom: 0.25rem;">11. Registration Form Questions & Custom Fields Builder</h3>
+                <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">
+                  Edit standard form questions (Full Name, Email, Transaction ID, etc.) and add new custom fields to the student registration form.
+                </p>
+              </div>
+              <button type="button" class="btn-icon-action" id="addNewFormFieldBtn" style="color: #047857; font-weight: 700; border-color: #a7f3d0; background: #ecfdf5;">
+                + Add New Field to Form
+              </button>
+            </div>
+
+            <!-- Standard Form Fields Labels Editor -->
+            <div style="margin-bottom: 1.25rem;">
+              <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.75rem;">
+                Standard Form Question Labels
+              </h4>
+              <div class="dept-form-grid">
+                <div class="form-group">
+                  <label class="form-label" for="st_labelFullName">Full Name Label</label>
+                  <input type="text" id="st_labelFullName" class="form-input" data-config-key="labelFullName" placeholder="Full Name">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="st_labelEmail">Email ID Label</label>
+                  <input type="text" id="st_labelEmail" class="form-input" data-config-key="labelEmail" placeholder="Email ID">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="st_labelCollege">College / Institution Label</label>
+                  <input type="text" id="st_labelCollege" class="form-input" data-config-key="labelCollege" placeholder="College / Institution Name">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="st_labelYear">Studying Year Label</label>
+                  <input type="text" id="st_labelYear" class="form-input" data-config-key="labelYear" placeholder="Studying Year">
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="st_labelTransactionId">Payment Reference Label</label>
+                  <input type="text" id="st_labelTransactionId" class="form-input" data-config-key="labelTransactionId" placeholder="Payment Transaction ID">
+                  <div class="form-hint">Label for the payment reference (formerly UTR).</div>
+                </div>
+
+                <div class="form-group">
+                  <label class="form-label" for="st_placeholderTransactionId">Payment Reference Placeholder</label>
+                  <input type="text" id="st_placeholderTransactionId" class="form-input" data-config-key="placeholderTransactionId" placeholder="e.g. 429104829104 or UPI Ref ID">
+                </div>
+
+                <div class="form-group dept-form-full">
+                  <label class="form-label" for="st_regSubmitBtnText">Form Submit Button Text</label>
+                  <input type="text" id="st_regSubmitBtnText" class="form-input" data-config-key="regSubmitBtnText" placeholder="Submit Registration for Verification">
+                </div>
+              </div>
+            </div>
+
+            <!-- List of Dynamic Custom Form Questions -->
+            <div style="border-top: 1px dashed var(--color-border); padding-top: 1rem;">
+              <h4 style="font-size: 0.875rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.75rem;">
+                Custom Questions / Extra Fields (Add as many as needed)
+              </h4>
+              <div id="customFormFieldsAdminList" style="display: flex; flex-direction: column; gap: 0.75rem;">
+                <!-- Dynamically rendered by js/admin.js -->
+              </div>
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn-lg btn-primary">
+              💾 Save All Website Text
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 3: DRAFT EMAIL TEMPLATE EDITOR
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="emailTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Draft Email Template Editor</h2>
+            <p class="admin-card-desc">Configure the confirmation email template sent to students upon registration approval.</p>
+          </div>
+          <button type="button" class="btn-lg btn-primary" id="saveEmailTemplateBtn">
+            💾 Save Email Template
+          </button>
+        </div>
+
+        <form id="emailTemplateForm">
+          <div class="dept-form-grid">
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgEmailSubject">Email Subject Line <span class="required-mark">*</span></label>
+              <input type="text" id="cfgEmailSubject" class="form-input" value="Thanks for registering! Your registration has been confirmed" required>
+              <div class="form-hint">Default subject delivered to registered students upon confirmation.</div>
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgEmailHeading">Email Inner Heading / Banner</label>
+              <input type="text" id="cfgEmailHeading" class="form-input" value="Registration Confirmed!">
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgEmailCustomMessage">Confirmation Message Body <span class="required-mark">*</span></label>
+              <textarea id="cfgEmailCustomMessage" class="form-textarea" rows="4" required>Thanks for registering! Your registration has been confirmed. We look forward to welcoming you to the event.</textarea>
+              <div class="form-hint">This text appears prominently right after "Dear {Student Name},".</div>
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgEmailSignoff">Official Department Signature & Contact</label>
+              <textarea id="cfgEmailSignoff" class="form-textarea" rows="3">Department of EE - VLSI Design and Technology
+Sri Shakthi Institute of Engineering & Technology, Coimbatore
+Contact: vlsi.events@siet.ac.in</textarea>
+            </div>
+          </div>
+
+          <!-- Dynamic Placeholders Legend -->
+          <div style="background: #f1f5f9; border: 1px solid #cbd5e1; border-radius: var(--radius-md); padding: 1rem; margin-top: 1.5rem;">
+            <div style="font-size: 0.8125rem; font-weight: 700; color: #1e293b; margin-bottom: 0.35rem;">
+              ℹ️ Automatic Template Variables (Auto-filled per student):
+            </div>
+            <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+              <span class="placeholder-pill">{STUDENT_NAME}</span>
+              <span class="placeholder-pill">{EVENT_NAME}</span>
+              <span class="placeholder-pill">{COLLEGE_NAME}</span>
+              <span class="placeholder-pill">{YEAR}</span>
+              <span class="placeholder-pill">{PASS_ID}</span>
+              <span class="placeholder-pill">{VENUE}</span>
+            </div>
+          </div>
+
+          <!-- Live Email Preview Box -->
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin: 2rem 0 1rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+            Live Confirmation Email Preview
+          </h3>
+
+          <div class="email-preview-box">
+            <div class="email-header-meta">
+              <div class="email-meta-line">
+                <span class="email-meta-lbl">Subject:</span>
+                <span class="email-meta-val" id="tmplPreviewSubject" style="color: #047857; font-weight: 700;">Thanks for registering! Your registration has been confirmed</span>
+              </div>
+              <div class="email-meta-line">
+                <span class="email-meta-lbl">From:</span>
+                <span class="email-meta-val">vlsi.events@siet.ac.in (EE - VLSI Design and Technology)</span>
+              </div>
+              <div class="email-meta-line">
+                <span class="email-meta-lbl">To:</span>
+                <span class="email-meta-val" style="color: #64748b;">aditi.sharma@example.com (Sample Student)</span>
+              </div>
+            </div>
+
+            <div class="email-body-content" id="tmplPreviewBody">
+              <!-- Rendered dynamically by js/admin.js -->
+            </div>
+          </div>
+
+          <div style="margin-top: 1.5rem; display: flex; justify-content: flex-end;">
+            <button type="submit" class="btn-lg btn-primary">
+              💾 Save Email Template
+            </button>
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 4: SCROLLING TICKER ANNOUNCEMENTS
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="tickerTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Live Announcement Ticker</h2>
+            <p class="admin-card-desc">These messages continuously scroll across the top bar of the website and pause when visitors hover over them.</p>
+          </div>
+          <button type="button" class="btn-lg btn-primary" id="openAddTickerBtn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="12" y1="5" x2="12" y2="19"></line>
+              <line x1="5" y1="12" x2="19" y2="12"></line>
+            </svg>
+            Add Ticker Announcement
+          </button>
+        </div>
+
+        <div class="ticker-admin-list" id="tickerAdminList">
+          <!-- Rendered dynamically by js/admin.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 5: ABOUT DEPARTMENT & COLLEGE DETAILS
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="deptTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Department & Institution Information</h2>
+            <p class="admin-card-desc">Customize college name, department title, contact details, lab locations, and statistics.</p>
+          </div>
+          <button type="button" class="btn-lg btn-primary" id="saveDeptConfigBtn">
+            Save Department Info
+          </button>
+        </div>
+
+        <form id="deptConfigForm">
+          <div class="dept-form-grid">
+            <div class="form-group">
+              <label class="form-label" for="cfgInstitution">Institution / College Name</label>
+              <input type="text" id="cfgInstitution" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgDepartmentName">Department Name</label>
+              <input type="text" id="cfgDepartmentName" class="form-input" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgParentDepartment">Parent Department</label>
+              <input type="text" id="cfgParentDepartment" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgContactEmail">Department Contact Email</label>
+              <input type="email" id="cfgContactEmail" class="form-input" required>
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgTagline">Tagline</label>
+              <input type="text" id="cfgTagline" class="form-input">
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="cfgWelcomeMessage">Homepage Welcome Message</label>
+              <textarea id="cfgWelcomeMessage" class="form-textarea" rows="3"></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgOffice">Department Office Location</label>
+              <input type="text" id="cfgOffice" class="form-input">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="cfgLabLocations">Lab Facilities Location</label>
+              <input type="text" id="cfgLabLocations" class="form-input">
+            </div>
+          </div>
+
+          <!-- Registration QR Photo & Instructions Settings -->
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin: 2rem 0 1rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+            Registration QR Code Photo & Instructions
+          </h3>
+          <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.5rem; display: flex; gap: 2rem; align-items: center; flex-wrap: wrap;">
+            <div style="text-align: center;">
+              <div style="width: 130px; height: 130px; background: #ffffff; border: 1px solid #cbd5e1; border-radius: var(--radius-md); padding: 0.35rem; margin-bottom: 0.5rem; display: flex; align-items: center; justify-content: center;">
+                <img id="adminQrPreview" src="assets/registration-qr.svg" alt="Registration QR Code Preview" style="width: 100%; height: 100%; object-fit: contain;">
+              </div>
+              <span style="font-size: 0.75rem; color: var(--color-text-muted); font-weight: 600;">Current Active QR</span>
+            </div>
+
+            <div style="flex: 1; min-width: 280px;">
+              <div class="form-group" style="margin-bottom: 0.75rem;">
+                <label class="form-label" for="adminQrFileInput">Upload New QR Photo / Image</label>
+                <input type="file" id="adminQrFileInput" class="form-input" accept="image/*">
+                <div class="form-hint">Upload your UPI QR code, payment scanner, or pass verification image.</div>
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0.75rem;">
+                <label class="form-label" for="cfgQrImage">Or Image File Path / URL</label>
+                <input type="text" id="cfgQrImage" class="form-input" value="assets/registration-qr.svg">
+              </div>
+
+              <div class="form-group" style="margin-bottom: 0;">
+                <label class="form-label" for="cfgQrInstructions">QR Instructions for Students</label>
+                <input type="text" id="cfgQrInstructions" class="form-input" value="Scan this QR code with any UPI app to complete verification, then submit your details below.">
+              </div>
+            </div>
+          </div>
+
+          <h3 style="font-size: 1.1rem; font-weight: 800; margin: 2rem 0 1rem; border-top: 1px solid var(--color-border); padding-top: 1.5rem;">
+            Homepage Quick Stats Counters
+          </h3>
+          <div class="dept-form-grid" id="statsEditorGrid">
+            <!-- 4 stats items populated by js/admin.js -->
+          </div>
+        </form>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 6: STUDENT REGISTRATIONS & APPROVAL WORKFLOW
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="regsTab" role="tabpanel">
+      <div class="admin-card">
+        <div class="admin-card-header">
+          <div>
+            <h2 class="admin-card-title">Student Registrations & Approval Queue</h2>
+            <p class="admin-card-desc">Review submitted student registrations, verify payments/QR scans, and approve to trigger confirmation emails.</p>
+          </div>
+          <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+            <button type="button" class="btn-lg btn-primary" id="exportCsvBtn">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                <polyline points="7 10 12 15 17 10"></polyline>
+                <line x1="12" y1="15" x2="12" y2="3"></line>
+              </svg>
+              Download CSV Spreadsheet
+            </button>
+            <button type="button" class="btn-icon-action btn-delete" id="clearRegsBtn">
+              Clear All
+            </button>
+          </div>
+        </div>
+
+        <!-- Filter Pills & Search -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 1rem; flex-wrap: wrap; margin-bottom: 1.25rem;">
+          <div class="category-filter-group" id="regStatusFilters">
+            <button type="button" class="filter-btn active" data-status-filter="all">
+              <span>All Registrations</span>
+              <span class="filter-count-badge" id="countRegAll">0</span>
+            </button>
+            <button type="button" class="filter-btn" data-status-filter="Pending Approval">
+              <span style="color: #b45309;">⏳ Pending Approval</span>
+              <span class="filter-count-badge" id="countRegPending" style="background: #fef3c7; color: #b45309;">0</span>
+            </button>
+            <button type="button" class="filter-btn" data-status-filter="Confirmed">
+              <span style="color: #047857;">✅ Confirmed</span>
+              <span class="filter-count-badge" id="countRegConfirmed" style="background: #ecfdf5; color: #047857;">0</span>
+            </button>
+          </div>
+
+          <input type="search" id="regSearchInput" class="form-input" placeholder="Search by name, college, email, or event..." style="max-width: 320px;">
+        </div>
+
+        <div style="overflow-x: auto;">
+          <table class="admin-events-table">
+            <thead>
+              <tr>
+                <th>Status</th>
+                <th>Student Name</th>
+                <th>Email ID</th>
+                <th>College / Institution</th>
+                <th>Year</th>
+                <th>Event</th>
+                <th>Transaction ID</th>
+                <th style="text-align: right;">Action</th>
+              </tr>
+            </thead>
+            <tbody id="adminRegsTableBody">
+              <!-- Rendered dynamically by js/admin.js -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- =====================================================================
+         TAB 7: BACKUP & EXPORT
+         ===================================================================== -->
+    <section class="admin-tab-panel" id="backupTab" role="tabpanel">
+      <div class="admin-card">
+        <h2 class="admin-card-title">Data Storage & File Management</h2>
+        <p class="admin-card-desc" style="margin-bottom: 1.5rem;">Save your changes to disk or download backups.</p>
+
+        <div style="display: flex; flex-direction: column; gap: 1.5rem; max-width: 600px;">
+          <div style="background: #eff6ff; border: 1px solid #bfdbfe; padding: 1.25rem; border-radius: var(--radius-lg);">
+            <h3 style="font-size: 1rem; font-weight: 700; color: #1e40af; margin-bottom: 0.25rem;">1. Sync with Local Server</h3>
+            <p style="font-size: 0.875rem; color: #1e3a8a; margin-bottom: 1rem;">
+              When running `node server.js`, this automatically rewrites <code>js/events-data.js</code> on your computer so changes persist across all devices.
+            </p>
+            <button type="button" class="btn-lg btn-primary" id="syncServerDiskBtn">
+              💾 Save Directly to Server Disk
+            </button>
+          </div>
+
+          <div style="background: #f8fafc; border: 1px solid var(--color-border); padding: 1.25rem; border-radius: var(--radius-lg);">
+            <h3 style="font-size: 1rem; font-weight: 700; color: var(--color-text-primary); margin-bottom: 0.25rem;">2. Download Updated File</h3>
+            <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+              Download an updated <code>events-data.js</code> file to save into your <code>js/</code> folder anytime.
+            </p>
+            <button type="button" class="btn-lg btn-secondary" id="downloadJsBtn">
+              📥 Download Updated events-data.js
+            </button>
+          </div>
+
+          <div style="background: #fef2f2; border: 1px solid #fecaca; padding: 1.25rem; border-radius: var(--radius-lg);">
+            <h3 style="font-size: 1rem; font-weight: 700; color: #991b1b; margin-bottom: 0.25rem;">3. Reset to Defaults</h3>
+            <p style="font-size: 0.875rem; color: #b91c1c; margin-bottom: 1rem;">
+              Reset all events back to the original VELTRAXX 2.0, VELTRAXX'26, and Synopsys course configurations.
+            </p>
+            <button type="button" class="btn-icon-action btn-delete" id="resetDefaultsBtn">
+              ⚠️ Reset to Factory Defaults
+            </button>
+          </div>
+
+          <div style="background: #fdf4ff; border: 1px solid #f0abfc; padding: 1.25rem; border-radius: var(--radius-lg);">
+            <h3 style="font-size: 1rem; font-weight: 700; color: #86198f; margin-bottom: 0.25rem;">4. Admin Security & PIN</h3>
+            <p style="font-size: 0.875rem; color: #a21caf; margin-bottom: 1rem;">
+              Change your 4+ digit Admin Access PIN. You can also click the <strong>"🔑 Change PIN"</strong> button in the top navigation bar anytime.
+            </p>
+            <button type="button" class="btn-lg btn-primary" id="openChangePinTabBtn" style="background: #9333ea; border-color: #9333ea;">
+              🔑 Change Admin PIN
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- =========================================================================
+       MODAL: ADD / EDIT EVENT
+       ========================================================================= -->
+  <div class="modal-backdrop" id="eventEditModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 820px;">
+      <div class="modal-body" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.5rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+          <h2 class="modal-title" id="eventEditModalTitle" style="color: var(--color-text-primary);">Add New Event</h2>
+          <button type="button" class="modal-close-btn" id="closeEventEditModalBtn" style="color: #64748b; background: #f1f5f9;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <form id="eventEditorForm">
+          <input type="hidden" id="editEventOriginalId">
+
+          <!-- 16:9 Aspect Ratio Event Poster Upload & Preview Box -->
+          <div class="form-group dept-form-full" style="margin-bottom: 1.75rem;">
+            <label class="form-label" style="font-size: 0.95rem; font-weight: 700;">Event Poster Image (16:9 Aspect Ratio Box)</label>
+            <div class="poster-upload-card">
+              <div class="poster-ratio-preview-box" id="adminPosterPreviewBox">
+                <img id="adminPosterPreviewImg" src="" alt="Poster Preview" style="display: none;" class="card-poster-img">
+                <div id="adminPosterPlaceholder" class="poster-preview-placeholder">
+                  <svg width="34" height="34" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75">
+                    <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                    <circle cx="8.5" cy="8.5" r="1.5"></circle>
+                    <polyline points="21 15 16 10 5 21"></polyline>
+                  </svg>
+                  <span style="font-weight: 600;">No Poster Selected</span>
+                  <span style="font-size: 0.725rem; color: #94a3b8;">Given 16:9 Ratio Box</span>
+                </div>
+                <span class="ratio-badge">16:9 Ratio Box</span>
+              </div>
+
+              <div style="flex: 1; min-width: 260px;">
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                  <label class="form-label" for="editEventPosterFile">Upload Poster Image</label>
+                  <input type="file" id="editEventPosterFile" class="form-input" accept="image/*">
+                  <div class="form-hint">Upload SVG, PNG, or JPG banner to display in the 16:9 box.</div>
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0.75rem;">
+                  <label class="form-label" for="editEventPosterUrl">Or Poster Image Path / URL</label>
+                  <input type="text" id="editEventPosterUrl" class="form-input" placeholder="e.g. assets/veltraxx2-poster.svg">
+                </div>
+
+                <div class="form-group" style="margin-bottom: 0;">
+                  <label class="form-label" for="editEventPosterFit">Poster Fit in Box</label>
+                  <select id="editEventPosterFit" class="form-select">
+                    <option value="cover">Cover (Fill entire 16:9 box nicely)</option>
+                    <option value="contain">Contain (Fit inside 16:9 box with margins)</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="dept-form-grid">
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="editEventTitle">Event Title <span class="required-mark">*</span></label>
+              <input type="text" id="editEventTitle" class="form-input" placeholder="e.g. VELTRAXX 2.0" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventId">Event Identifier / Slug <span class="required-mark">*</span></label>
+              <input type="text" id="editEventId" class="form-input" placeholder="e.g. veltraxx-2" required>
+              <div class="form-hint">Used in URLs: <code>#event/veltraxx-2</code></div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventCategory">Category</label>
+              <select id="editEventCategory" class="form-select">
+                <option value="Competitions">Competitions & Symposiums</option>
+                <option value="Workshops">Workshops & Courses</option>
+                <option value="Talks">Technical Talks & Keynotes</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventCategoryLabel">Category Sub-Label</label>
+              <input type="text" id="editEventCategoryLabel" class="form-input" placeholder="e.g. Flagship Technical Symposium">
+            </div>
+
+            <!-- Status Dropdown: Open, Opens Soon, Closed, Completed -->
+            <div class="form-group">
+              <label class="form-label" for="editEventStatus">Event Status <span class="required-mark">*</span></label>
+              <select id="editEventStatus" class="form-select" required>
+                <option value="Open">Registration Open</option>
+                <option value="Coming Soon">Opens Soon / COMING SOON...</option>
+                <option value="Closed">Registration Closed</option>
+                <option value="Completed">Event Completed</option>
+              </select>
+            </div>
+
+            <!-- Registration Status Control Dropdown -->
+            <div class="form-group">
+              <label class="form-label" for="editEventRegToggle">Registration Control <span class="required-mark">*</span></label>
+              <select id="editEventRegToggle" class="form-select" required>
+                <option value="opens_soon">🔥 Opens Soon (Shows "Opens Soon" - Form Locked)</option>
+                <option value="open">🟢 Open (Users Can Register - Form Opens)</option>
+                <option value="closed">🔴 Closed (Registration Closed - Form Locked)</option>
+              </select>
+              <div class="form-hint">Controls whether students can open the form or see "Opens Soon" / "Closed".</div>
+            </div>
+
+            <!-- Registration Form Title / Name -->
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="editEventFormName">Registration Form Title / Name</label>
+              <input type="text" id="editEventFormName" class="form-input" placeholder="e.g. VELTRAXX 2.0 Registration Form">
+              <div class="form-hint">Text name displayed at the top of the form modal when opened.</div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventDate">Event Date Text <span class="required-mark">*</span></label>
+              <input type="text" id="editEventDate" class="form-input" placeholder="e.g. Dec 18, 2026 or Event Completed" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventTime">Event Timing</label>
+              <input type="text" id="editEventTime" class="form-input" placeholder="e.g. 09:30 AM – 05:00 PM">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventDeadline">Registration Status / Deadline <span class="required-mark">*</span></label>
+              <input type="text" id="editEventDeadline" class="form-input" placeholder="e.g. Register Now • Limited Seats or Registrations Closed" required>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventVenue">Venue Location</label>
+              <input type="text" id="editEventVenue" class="form-input" placeholder="e.g. Sri Shakthi Auditorium, SIET">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventVenueType">Venue Mode</label>
+              <input type="text" id="editEventVenueType" class="form-input" placeholder="e.g. In-Person (Campus Event)">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventTools">EDA Tools & Hardware (comma-separated)</label>
+              <input type="text" id="editEventTools" class="form-input" placeholder="e.g. Cadence Virtuoso, Synopsys EDA, Xilinx Vivado">
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="editEventShortSummary">Short Summary (displayed on card) <span class="required-mark">*</span></label>
+              <textarea id="editEventShortSummary" class="form-textarea" rows="2" placeholder="Brief 1-2 sentence overview..." required></textarea>
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="editEventDescription">Full Description & Overview</label>
+              <textarea id="editEventDescription" class="form-textarea" rows="4" placeholder="Detailed syllabus, objectives, and information..."></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventCoordName">Faculty Coordinator Name</label>
+              <input type="text" id="editEventCoordName" class="form-input" placeholder="Dr. S. Department Lead">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventCoordEmail">Coordinator Email</label>
+              <input type="email" id="editEventCoordEmail" class="form-input" placeholder="vlsi.events@siet.ac.in">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventPattern">Vector Card Artwork Motif</label>
+              <select id="editEventPattern" class="form-select">
+                <option value="wafer-grid">300mm Silicon Wafer & Hackathon Die Grid</option>
+                <option value="nanosheet">3D GAAFET Nanosheet Atomic Stack</option>
+                <option value="asic-routing">TSMC 28nm ASIC Floorplan & Routing Tracks</option>
+                <option value="fpga-grid">FPGA CLB Logic Block Matrix & Clock</option>
+                <option value="logic-gates">Digital Logic Gates & Bug Hunt Crosshair</option>
+                <option value="analog-waves">Cadence Virtuoso Analog Op-Amp & Sine Waves</option>
+                <option value="riscv-pipeline">5-Stage RISC-V CPU Instruction Pipeline</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="editEventColor">Primary Theme Color</label>
+              <input type="color" id="editEventColor" class="form-input" value="#1d4ed8" style="height: 44px; padding: 0.2rem;">
+            </div>
+
+            <div class="form-group dept-form-full">
+              <label class="form-label" for="editEventRegUrl">Custom Registration URL (Optional)</label>
+              <input type="url" id="editEventRegUrl" class="form-input" placeholder="Leave blank to use built-in registration, or paste Google/Microsoft Form URL">
+              <div class="form-hint">Leave blank to use the built-in student registration flow with QR verification.</div>
+            </div>
+          </div>
+
+          <!-- Schedule Timeline Editor -->
+          <div style="margin-top: 1.5rem; border-top: 1px solid var(--color-border); padding-top: 1.25rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+              <label class="form-label" style="margin-bottom: 0;">Session Schedule / Agenda</label>
+              <button type="button" class="btn-icon-action" id="addScheduleRowBtn">
+                + Add Session Row
+              </button>
+            </div>
+            <div id="scheduleRowsContainer">
+              <!-- Dynamically managed rows -->
+            </div>
+          </div>
+
+          <div style="margin-top: 2rem; display: flex; justify-content: flex-end; gap: 0.75rem;">
+            <button type="button" class="btn-lg btn-secondary" id="cancelEventEditBtn">Cancel</button>
+            <button type="submit" class="btn-lg btn-primary">Save Event Changes</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: REGISTRATION APPROVAL & EDITABLE DRAFT EMAIL DISPATCHER
+       ========================================================================= -->
+  <div class="modal-backdrop" id="emailConfirmationModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 720px;">
+      <div class="modal-body" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+          <div>
+            <span class="status-pill status-confirmed-pill">Registration Approval</span>
+            <h2 class="modal-title" style="color: var(--color-text-primary); margin-top: 0.25rem;">Confirm & Send Email</h2>
+          </div>
+          <button type="button" class="modal-close-btn" id="closeEmailModalBtn" style="color: #64748b; background: #f1f5f9;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1rem;">
+          You can edit the draft subject and confirmation message below before approving the student's registration.
+        </p>
+
+        <!-- Editable Draft Email Controls -->
+        <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem;">
+          <div style="font-weight: 700; font-size: 0.875rem; color: #1e3a8a; margin-bottom: 0.75rem; display: flex; align-items: center; gap: 0.5rem;">
+            <span>✏️ Edit Draft Mail (Before Approval)</span>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0.75rem;">
+            <label class="form-label" for="emailModalSubjectInput">Subject Line</label>
+            <input type="text" id="emailModalSubjectInput" class="form-input" style="font-weight: 600; color: #047857;" value="Thanks for registering! Your registration has been confirmed">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 0;">
+            <label class="form-label" for="emailModalCustomMsgInput">Custom Confirmation Message Body</label>
+            <textarea id="emailModalCustomMsgInput" class="form-textarea" rows="3" placeholder="Edit the message delivered to this student..."></textarea>
+          </div>
+        </div>
+
+        <!-- Live Formatted Email Preview Box -->
+        <div class="email-preview-box">
+          <div class="email-header-meta">
+            <div class="email-meta-line">
+              <span class="email-meta-lbl">To:</span>
+              <span class="email-meta-val" id="emailModalTo">student@example.com</span>
+            </div>
+            <div class="email-meta-line">
+              <span class="email-meta-lbl">From:</span>
+              <span class="email-meta-val" id="emailModalFrom">vlsi.events@siet.ac.in (EE - VLSI Department)</span>
+            </div>
+            <div class="email-meta-line">
+              <span class="email-meta-lbl">Subject:</span>
+              <span class="email-meta-val" id="emailModalSubjectPreview" style="color: #047857; font-weight: 700;">Thanks for registering! Your registration has been confirmed</span>
+            </div>
+          </div>
+
+          <div class="email-body-content" id="emailModalBodyText">
+            <!-- Dynamic Email Body rendered by js/admin.js -->
+          </div>
+        </div>
+
+        <!-- Action Buttons -->
+        <div style="display: flex; justify-content: space-between; align-items: center; gap: 0.75rem; flex-wrap: wrap; margin-top: 1.5rem;">
+          <button type="button" class="btn-icon-action" id="copyEmailTextBtn">
+            📋 Copy Email Text
+          </button>
+
+          <div style="display: flex; gap: 0.75rem;">
+            <a href="#" id="launchMailtoBtn" class="btn-lg btn-secondary" style="font-size: 0.875rem;">
+              🚀 Open in Email App (mailto:)
+            </a>
+            <button type="button" class="btn-lg btn-primary" id="confirmApprovalBtn">
+              ✅ Approve & Confirm Registration
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: OPEN ON MOBILE (QR & IP helper)
+       ========================================================================= -->
+  <div class="modal-backdrop" id="mobileModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-body" style="padding: 2rem; text-align: center;">
+        <h2 class="modal-title" style="color: var(--color-text-primary); margin-bottom: 0.5rem;">📱 Open on Your Mobile</h2>
+        <p style="font-size: 0.875rem; color: var(--color-text-secondary); margin-bottom: 1.25rem;">
+          Connect your phone to the same Wi-Fi network to open either portal:
+        </p>
+
+        <div style="background: #f8fafc; border: 1px solid var(--color-border); border-radius: var(--radius-lg); padding: 1.25rem; margin-bottom: 1.25rem; text-align: left;">
+          <div style="margin-bottom: 0.75rem;">
+            <span style="font-size: 0.75rem; font-weight: 700; color: var(--color-primary); text-transform: uppercase;">1. Public Events Portal</span>
+            <div style="font-family: monospace; font-size: 0.95rem; font-weight: 700; color: #1e293b;" id="mobilePublicUrl">http://10.180.19.77:3000/</div>
+          </div>
+          <div>
+            <span style="font-size: 0.75rem; font-weight: 700; color: #b45309; text-transform: uppercase;">2. Staff Admin Portal</span>
+            <div style="font-family: monospace; font-size: 0.95rem; font-weight: 700; color: #1e293b;" id="mobileAdminUrl">http://10.180.19.77:3000/admin.html</div>
+          </div>
+        </div>
+
+        <button type="button" class="btn-lg btn-primary" id="closeMobileModalBtn" style="width: 100%; justify-content: center;">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- =========================================================================
+       MODAL: CHANGE ADMIN PIN
+       ========================================================================= -->
+  <div class="modal-backdrop" id="changePinModal" role="dialog" aria-modal="true" aria-hidden="true">
+    <div class="modal-dialog" style="max-width: 480px;">
+      <div class="modal-body" style="padding: 2rem;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; border-bottom: 1px solid var(--color-border); padding-bottom: 1rem;">
+          <div style="display: flex; align-items: center; gap: 0.5rem;">
+            <span style="font-size: 1.5rem;">🔑</span>
+            <div>
+              <h2 class="modal-title" style="color: var(--color-text-primary); margin: 0; font-size: 1.25rem;">Change Admin PIN</h2>
+              <p style="font-size: 0.8125rem; color: var(--color-text-secondary); margin: 0;">Set a custom security PIN for accessing this portal</p>
+            </div>
+          </div>
+          <button type="button" class="modal-close-btn" id="closeChangePinModalBtn" style="color: #64748b; background: #f1f5f9;">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+
+        <form id="changePinForm">
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="currentAdminPin">Current PIN <span class="required-mark">*</span></label>
+            <input type="password" id="currentAdminPin" class="form-input" placeholder="Enter current PIN" required autocomplete="current-password">
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1rem;">
+            <label class="form-label" for="newAdminPin">New PIN <span class="required-mark">*</span></label>
+            <input type="password" id="newAdminPin" class="form-input" placeholder="Enter new PIN (at least 4 characters)" required autocomplete="new-password">
+            <div class="form-hint">Choose a PIN you will remember. Works across desktop and mobile.</div>
+          </div>
+
+          <div class="form-group" style="margin-bottom: 1.5rem;">
+            <label class="form-label" for="confirmAdminPin">Confirm New PIN <span class="required-mark">*</span></label>
+            <input type="password" id="confirmAdminPin" class="form-input" placeholder="Re-enter new PIN" required autocomplete="new-password">
+          </div>
+
+          <div style="display: flex; gap: 0.75rem; justify-content: flex-end;">
+            <button type="button" class="btn-lg btn-secondary" id="cancelChangePinBtn">Cancel</button>
+            <button type="submit" class="btn-lg btn-primary" id="saveNewPinBtn">
+              💾 Save New PIN
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/events-data.js"></script>
+  <script src="js/illustrations.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>
