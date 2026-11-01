@@ -74,6 +74,16 @@ const server = http.createServer((req, res) => {
   // -------------------------------------------------------------------------
   // Static File Serving
   // -------------------------------------------------------------------------
+ // Prevent public access to registration records
+if (
+  reqPath === '/data' ||
+  reqPath.startsWith('/data/') ||
+  reqPath === '/registrations.json'
+) {
+  res.writeHead(404);
+  res.end('Not Found');
+  return;
+}
   let filePathRel = reqPath;
   if (filePathRel === '/' || filePathRel === '') {
     filePathRel = '/index.html';
